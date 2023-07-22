@@ -4,7 +4,7 @@ public interface IImage {
 
     Long getId();
 
-    Long getName();
+    String getName();
 
     String getUrl();
 
