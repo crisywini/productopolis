@@ -2,6 +2,7 @@ package co.crisi.productopolis.domain.validator.decorator;
 
 import co.crisi.productopolis.domain.exception.NegativeNumberException;
 import co.crisi.productopolis.domain.exception.NotCorrectTypeException;
+import co.crisi.productopolis.domain.validator.Validator;
 import java.util.Optional;
 
 public class NonNegativeNumberValidatorDecorator extends ValidatorDecorator {

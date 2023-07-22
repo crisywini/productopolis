@@ -1,6 +1,8 @@
 package co.crisi.productopolis.domain.validator.decorator;
 
 import co.crisi.productopolis.domain.exception.IllegalDateException;
+import co.crisi.productopolis.domain.validator.Validator;
+import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 

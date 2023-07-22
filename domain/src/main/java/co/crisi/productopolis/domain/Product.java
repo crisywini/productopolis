@@ -4,7 +4,7 @@ import co.crisi.productopolis.domain.validator.decorator.DateValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NonNegativeNumberValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecorator;
-import co.crisi.productopolis.domain.validator.decorator.ValidatorImpl;
+import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import java.time.LocalDate;
 import java.util.List;
 

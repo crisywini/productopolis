@@ -1,6 +1,8 @@
 package co.crisi.productopolis.domain.validator.decorator;
 
 import co.crisi.productopolis.domain.exception.NegativeNumberException;
+import co.crisi.productopolis.domain.validator.Validator;
+import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

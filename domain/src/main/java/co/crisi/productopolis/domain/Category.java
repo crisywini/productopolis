@@ -3,7 +3,7 @@ package co.crisi.productopolis.domain;
 import co.crisi.productopolis.domain.validator.decorator.DateValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecorator;
-import co.crisi.productopolis.domain.validator.decorator.ValidatorImpl;
+import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import java.time.LocalDate;
 
 public record Category(Long id, String name, String description, LocalDate creationDate,

@@ -1,4 +1,4 @@
-package co.crisi.productopolis.domain.validator.decorator;
+package co.crisi.productopolis.domain.validator;
 
 public interface Validator {
 

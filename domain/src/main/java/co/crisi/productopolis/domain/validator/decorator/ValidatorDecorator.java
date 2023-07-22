@@ -1,5 +1,6 @@
 package co.crisi.productopolis.domain.validator.decorator;
 
+import co.crisi.productopolis.domain.validator.Validator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

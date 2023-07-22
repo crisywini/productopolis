@@ -2,7 +2,7 @@ package co.crisi.productopolis.domain;
 
 import co.crisi.productopolis.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecorator;
-import co.crisi.productopolis.domain.validator.decorator.ValidatorImpl;
+import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 
 public record Image(Long id, String name, String url, IProduct product) implements IImage {
 

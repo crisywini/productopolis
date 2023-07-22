@@ -2,8 +2,7 @@ package co.crisi.productopolis.domain;
 
 import co.crisi.productopolis.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecorator;
-import co.crisi.productopolis.domain.validator.decorator.Validator;
-import co.crisi.productopolis.domain.validator.decorator.ValidatorImpl;
+import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import java.util.List;
 
 public record Brand(Long id, String name, String description, List<IProduct> products)

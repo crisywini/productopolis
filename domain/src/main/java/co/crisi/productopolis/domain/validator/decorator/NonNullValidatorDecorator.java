@@ -1,6 +1,7 @@
 package co.crisi.productopolis.domain.validator.decorator;
 
 import co.crisi.productopolis.domain.exception.NullFieldException;
+import co.crisi.productopolis.domain.validator.Validator;
 import java.util.Optional;
 
 public class NonNullValidatorDecorator extends ValidatorDecorator {
