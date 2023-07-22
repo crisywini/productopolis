@@ -12,7 +12,7 @@ public class NonNegativeNumberValidatorDecorator extends ValidatorDecorator {
 
     @Override
     public <T> T validate(T object, String fieldName) {
-        var validate = super.validate(object, fieldName);
+        var validate = this.objectValidator.validate(object, fieldName);
         Object t = switch (validate) {
             case Double d -> (Double) d;
             case Integer i -> (Integer) i;

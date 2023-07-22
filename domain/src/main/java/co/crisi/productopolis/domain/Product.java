@@ -3,31 +3,40 @@ package co.crisi.productopolis.domain;
 import co.crisi.productopolis.domain.validator.decorator.DateValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NonNegativeNumberValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.NonNullValidatorDecorator;
+import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecorator;
 import co.crisi.productopolis.domain.validator.decorator.ValidatorImpl;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public record Product(Long id, String name, String description, Double price, Long stock,
                       LocalDate creationDate, LocalDate lastUpdated, Boolean isFeatured, Boolean isActive,
-                      IBrand brand) implements IProduct {
+                      IBrand brand, List<IAttribute> attributes, List<ICategory> categories,
+                      List<IReview> reviews, List<IImage> images) implements IProduct {
 
     public Product(Long id, String name, String description, Double price, Long stock,
             LocalDate creationDate, LocalDate lastUpdated, Boolean isFeatured, Boolean isActive,
-            IBrand brand){
+            IBrand brand, List<IAttribute> attributes, List<ICategory> categories,
+            List<IReview> reviews, List<IImage> images) {
         var validator = new ValidatorImpl();
         var nullValidator = new NonNullValidatorDecorator(validator);
-        this.id = nullValidator.validate(id, "id");
-        this.name = nullValidator.validate(name, "name");
-        this.description = nullValidator.validate(description, "description");
         var negativeNumberValidator = new NonNegativeNumberValidatorDecorator(nullValidator);
+        var dateValidator = new DateValidatorDecorator(nullValidator);
+        var notEmptyValidator = new NotEmptyValidatorDecorator(nullValidator);
+        this.id = nullValidator.validate(id, "id");
+        this.name = notEmptyValidator.validate(name, "name");
+        this.description = notEmptyValidator.validate(description, "description");
         this.price = negativeNumberValidator.validate(price, "price");
         this.stock = negativeNumberValidator.validate(stock, "stock");
-        var dateValidator = new DateValidatorDecorator(nullValidator);
-        this.creationDate = dateValidator.validate(creationDate, "creationDate");
-        this.lastUpdated = dateValidator.validate(lastUpdated, "creationDate");
+        this.creationDate = dateValidator.validate(creationDate, "creation date");
+        this.lastUpdated = lastUpdated;
         this.isFeatured = isFeatured;
         this.isActive = isActive;
         this.brand = brand;
+        this.attributes = attributes;
+        this.categories = categories;
+        this.reviews = reviews;
+        this.images = images;
     }
 
     @Override
@@ -68,6 +77,26 @@ public record Product(Long id, String name, String description, Double price, Lo
     @Override
     public IBrand getBrand() {
         return brand;
+    }
+
+    @Override
+    public List<IAttribute> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public List<ICategory> getCategories() {
+        return categories;
+    }
+
+    @Override
+    public List<IReview> getReviews() {
+        return reviews;
+    }
+
+    @Override
+    public List<IImage> getImages() {
+        return images;
     }
 
 }

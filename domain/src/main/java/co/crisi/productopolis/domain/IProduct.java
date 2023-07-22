@@ -1,6 +1,7 @@
 package co.crisi.productopolis.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IProduct {
 
@@ -24,5 +25,13 @@ public interface IProduct {
     Boolean isActive();
 
     IBrand getBrand();
+
+    List<IAttribute> getAttributes();
+
+    List<ICategory> getCategories();
+
+    List<IReview> getReviews();
+
+    List<IImage> getImages();
 
 }

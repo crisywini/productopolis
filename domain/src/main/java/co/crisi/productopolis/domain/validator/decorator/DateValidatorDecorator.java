@@ -13,14 +13,14 @@ public class DateValidatorDecorator extends ValidatorDecorator {
 
     @Override
     public <T> T validate(T object, String fieldName) {
-        var validate = super.validate(object, fieldName);
+        var validate = this.objectValidator.validate(object, fieldName);
         var asDate = switch (validate) {
             case LocalDate l -> l;
             default -> throw new NotCorrectTypeException("Not a date!");
         };
         var errorMessage = "The %s should be a valid date!";
         return (T) Optional.of(asDate)
-                .filter(date -> date.isBefore(LocalDate.now()))
+                .filter(date -> date.isAfter(LocalDate.MIN))
                 .orElseThrow(() -> new IllegalDateException(String.format(errorMessage, fieldName)));
     }
 

@@ -11,11 +11,11 @@ public class NonNullValidatorDecorator extends ValidatorDecorator {
 
     @Override
     public <T> T validate(T object, String fieldName) {
-        var validate = super.validate(object, fieldName);
+        var validate = this.objectValidator.validate(object, fieldName);
         var errorMessage = "The %s should exists!";
         return Optional.ofNullable(validate)
                 .orElseThrow(() -> new NullFieldException(String
-                        .format("The %s should exists!", fieldName)));
+                        .format(errorMessage, fieldName)));
     }
 
 }

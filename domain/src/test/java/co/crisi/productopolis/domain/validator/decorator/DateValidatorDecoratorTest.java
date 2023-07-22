@@ -21,13 +21,13 @@ class DateValidatorDecoratorTest {
 
         assertThat(validate)
                 .isNotNull()
-                .isBefore(LocalDate.now());
+                .isAfter(LocalDate.MIN);
     }
 
     @Test
     void validateIllegalDateTest() {
 
-        LocalDate date = LocalDate.now();
+        LocalDate date = LocalDate.MIN;
         var dateValidator = new DateValidatorDecorator(validator);
 
         assertThatThrownBy(() -> dateValidator.validate(date, "date"))
