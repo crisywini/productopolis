@@ -19,7 +19,7 @@ public class NotEmptyValidatorDecorator extends ValidatorDecorator {
             case String s -> s;
             default -> throw new NotCorrectTypeException("Not a string!");
         };
-        var errorMessage = "The %s is empty!";
+        var errorMessage = "The %s should not be empty!";
         return (T) Optional.of(t)
                 .filter(v -> !v.isEmpty())
                 .orElseThrow(() -> new EmptyStringException(String.format(errorMessage, fieldName)));

@@ -49,7 +49,7 @@ class ProductTest {
 
         assertThat(throwable)
                 .isInstanceOf(EmptyStringException.class)
-                .hasMessage("The name is empty!");
+                .hasMessage("The name should not be empty!");
     }
 
     @Test

@@ -30,7 +30,7 @@ class NotEmptyValidatorDecoratorTest {
         var notEmptyValidatorDecorator = new NotEmptyValidatorDecorator(validator);
         assertThatThrownBy(() -> notEmptyValidatorDecorator.validate(field, "field"))
                 .isInstanceOf(EmptyStringException.class)
-                .hasMessage("The field is empty!");
+                .hasMessage("The field should not be empty!");
     }
 
 }
