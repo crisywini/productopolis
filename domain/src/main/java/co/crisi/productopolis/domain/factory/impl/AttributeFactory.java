@@ -7,8 +7,8 @@ import co.crisi.productopolis.domain.factory.IAttributeFactory;
 public class AttributeFactory implements IAttributeFactory {
 
     @Override
-    public IAttribute create(Long id, String name, String description) {
-        return new Attribute(id, name, description);
+    public IAttribute create(Long id, String name, String description, String value) {
+        return new Attribute(id, name, description, value);
     }
 
 }
