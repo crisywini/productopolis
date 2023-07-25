@@ -9,18 +9,18 @@ import co.crisi.productopolis.exception.RepeatedProductException;
 import co.crisi.productopolis.model.request.register.ProductRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;
-import co.crisi.productopolis.presenter.register.IProductPresenter;
+import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
 @RequiredArgsConstructor
-public class ProductInteractor implements IProductRegisterBoundary {
+public class ProductRegisterInteractor implements IProductRegisterBoundary {
 
     private final IProductFactory factory;
 
     private final IProductRegisterGateway gateway;
 
-    private final IProductPresenter presenter;
+    private final IProductRegisterPresenter presenter;
 
     private final IBrandExtractBoundary brandExtractBoundary;
 
@@ -33,24 +33,6 @@ public class ProductInteractor implements IProductRegisterBoundary {
             return presenter.prepareFailView(
                     new RepeatedProductException(String.format("Product with id %d already exists!", request.id())));
         }
-/*
-        try {
-            var brand  = brandExtractBoundary.getById(request.id());
-            IProduct product = factory.create(request.id(), request.name(), request.description(), request.price(),
-                    request.stock(), request.isFeatured(), request.isActive(),
-                    request.brandId(),
-                    request.attributeIds(),
-                    request.categoryIds());
-
-            gateway.save(product);
-            var response = productMapper.map(product);
-            return presenter.prepareSuccessfulView(response);
-        } catch (NullFieldException | EmptyStringException |
-                IllegalDateException | NegativeNumberException e) {
-            return presenter.prepareFailView(new ProductBusinessException(e.getMessage()));
-        }catch(BrandBusinessException e){
-            return presenter.prepareFailView(new ProductBusinessException(e.getMessage()));
-        }*/
         return null;
     }
 

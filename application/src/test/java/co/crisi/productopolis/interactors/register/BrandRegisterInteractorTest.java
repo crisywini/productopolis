@@ -8,7 +8,7 @@ import co.crisi.productopolis.domain.factory.impl.BrandFactory;
 import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.exception.RepeatedBrandException;
 import co.crisi.productopolis.model.response.mapper.BrandMapper;
-import co.crisi.productopolis.presenter.register.IBrandPresenter;
+import co.crisi.productopolis.presenter.register.IBrandRegisterPresenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -22,10 +22,10 @@ import static org.mockito.BDDMockito.verify;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class BrandInteractorTest {
+class BrandRegisterInteractorTest {
 
     @Mock
-    private IBrandPresenter presenter;
+    private IBrandRegisterPresenter presenter;
 
     @Mock
     private IBrandRegisterGateway gateway;
@@ -39,7 +39,7 @@ class BrandInteractorTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        boundary = new BrandInteractor(presenter, factory, gateway, mapper);
+        boundary = new BrandRegisterInteractor(presenter, factory, gateway, mapper);
     }
 
 

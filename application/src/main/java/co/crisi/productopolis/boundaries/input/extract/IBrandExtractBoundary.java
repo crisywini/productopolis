@@ -8,6 +8,6 @@ public interface IBrandExtractBoundary {
 
     BrandResponse getById(Long id) throws BrandBusinessException;
 
-    List<BrandResponse> getAll() throws BrandBusinessException;
+    List<BrandResponse> getAll();
 
 }

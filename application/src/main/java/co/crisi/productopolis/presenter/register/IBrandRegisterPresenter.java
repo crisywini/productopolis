@@ -1,15 +1,13 @@
-package co.crisi.productopolis.presenter.extract;
+package co.crisi.productopolis.presenter.register;
+
 
 import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.model.response.BrandResponse;
-import java.util.List;
 
-public interface IBrandPresenter {
+public interface IBrandRegisterPresenter {
 
     BrandResponse prepareSuccessfulView(BrandResponse response);
 
     BrandResponse prepareFailView(BrandBusinessException exception) throws BrandBusinessException;
-
-    List<BrandResponse> prepareSuccessfulView(List<BrandResponse> response);
 
 }

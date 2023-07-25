@@ -6,16 +6,16 @@ import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.exception.BrandNotFoundException;
 import co.crisi.productopolis.model.response.BrandResponse;
 import co.crisi.productopolis.model.response.mapper.BrandMapper;
-import co.crisi.productopolis.presenter.extract.IBrandPresenter;
+import co.crisi.productopolis.presenter.extract.IBrandExtractPresenter;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class BrandInteractor implements IBrandExtractBoundary {
+public class BrandExtractInteractor implements IBrandExtractBoundary {
 
     private final BrandMapper mapper;
 
-    private final IBrandPresenter presenter;
+    private final IBrandExtractPresenter presenter;
 
     private final IBrandExtractGateway gateway;
 

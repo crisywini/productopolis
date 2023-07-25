@@ -3,7 +3,7 @@ package co.crisi.productopolis.presenter.register;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.model.response.ProductResponse;
 
-public interface IProductPresenter {
+public interface IProductRegisterPresenter {
 
     ProductResponse prepareSuccessfulView(ProductResponse response);
 

@@ -8,13 +8,13 @@ import co.crisi.productopolis.exception.RepeatedBrandException;
 import co.crisi.productopolis.model.request.register.BrandRequest;
 import co.crisi.productopolis.model.response.BrandResponse;
 import co.crisi.productopolis.model.response.mapper.BrandMapper;
-import co.crisi.productopolis.presenter.register.IBrandPresenter;
+import co.crisi.productopolis.presenter.register.IBrandRegisterPresenter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class BrandInteractor implements IBrandRegisterBoundary {
+public class BrandRegisterInteractor implements IBrandRegisterBoundary {
 
-    private final IBrandPresenter presenter;
+    private final IBrandRegisterPresenter presenter;
 
     private final IBrandFactory factory;
 
