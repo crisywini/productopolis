@@ -1,7 +1,7 @@
-package co.crisi.productopolis.presenter;
+package co.crisi.productopolis.presenter.register;
 
 import co.crisi.productopolis.exception.ProductBusinessException;
-import co.crisi.productopolis.model.response.register.ProductResponse;
+import co.crisi.productopolis.model.response.ProductResponse;
 
 public interface IProductPresenter {
 

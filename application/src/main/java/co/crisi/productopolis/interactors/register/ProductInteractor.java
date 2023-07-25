@@ -2,20 +2,14 @@ package co.crisi.productopolis.interactors.register;
 
 import co.crisi.productopolis.boundaries.input.extract.IBrandExtractBoundary;
 import co.crisi.productopolis.boundaries.input.register.IProductRegisterBoundary;
-import co.crisi.productopolis.boundaries.output.register.IProductRegisterGateway;
-import co.crisi.productopolis.domain.IProduct;
-import co.crisi.productopolis.domain.exception.EmptyStringException;
-import co.crisi.productopolis.domain.exception.IllegalDateException;
-import co.crisi.productopolis.domain.exception.NegativeNumberException;
-import co.crisi.productopolis.domain.exception.NullFieldException;
+import co.crisi.productopolis.boundaries.output.IProductRegisterGateway;
 import co.crisi.productopolis.domain.factory.IProductFactory;
-import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.RepeatedProductException;
 import co.crisi.productopolis.model.request.register.ProductRequest;
-import co.crisi.productopolis.model.response.register.ProductResponse;
-import co.crisi.productopolis.model.response.register.mapper.ProductMapper;
-import co.crisi.productopolis.presenter.IProductPresenter;
+import co.crisi.productopolis.model.response.ProductResponse;
+import co.crisi.productopolis.model.response.mapper.ProductMapper;
+import co.crisi.productopolis.presenter.register.IProductPresenter;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 

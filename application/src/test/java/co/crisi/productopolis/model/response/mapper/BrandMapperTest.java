@@ -1,10 +1,11 @@
-package co.crisi.productopolis.model.response.register.mapper;
+package co.crisi.productopolis.model.response.mapper;
 
 import co.crisi.productopolis.domain.BrandRequestMother;
 import co.crisi.productopolis.domain.IBrand;
 import co.crisi.productopolis.domain.factory.IBrandFactory;
 import co.crisi.productopolis.domain.factory.impl.BrandFactory;
-import co.crisi.productopolis.model.response.register.BrandResponse;
+import co.crisi.productopolis.model.response.BrandResponse;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
@@ -38,6 +39,24 @@ class BrandMapperTest {
                 .isNotNull()
                 .extracting(IBrand::getId, IBrand::getName, IBrand::getDescription)
                 .contains(brand.getId(), brand.getName(), brand.getDescription());
+    }
+
+
+    @Test
+    void mapListOfIBrands(){
+
+        var brandOne = factory.create(1L, "Perficient", "A great company");
+        var brandTwo = factory.create(2L, "PSL", "A great company");
+        var brands = List.of(brandOne, brandTwo);
+
+
+        var response = mapper.map(brands);
+
+        assertThat(response)
+                .isNotNull()
+                .isNotEmpty()
+                .containsExactly(mapper.map(brandOne), mapper.map(brandTwo));
+
     }
 
 

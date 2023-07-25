@@ -1,14 +1,14 @@
 package co.crisi.productopolis.interactors.register;
 
 import co.crisi.productopolis.boundaries.input.register.IBrandRegisterBoundary;
-import co.crisi.productopolis.boundaries.output.register.IBrandRegisterGateway;
+import co.crisi.productopolis.boundaries.output.IBrandRegisterGateway;
 import co.crisi.productopolis.domain.BrandRequestMother;
 import co.crisi.productopolis.domain.factory.IBrandFactory;
 import co.crisi.productopolis.domain.factory.impl.BrandFactory;
 import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.exception.RepeatedBrandException;
-import co.crisi.productopolis.model.response.register.mapper.BrandMapper;
-import co.crisi.productopolis.presenter.IBrandPresenter;
+import co.crisi.productopolis.model.response.mapper.BrandMapper;
+import co.crisi.productopolis.presenter.register.IBrandPresenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;

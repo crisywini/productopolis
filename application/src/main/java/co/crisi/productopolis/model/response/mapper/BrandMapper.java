@@ -1,10 +1,11 @@
-package co.crisi.productopolis.model.response.register.mapper;
+package co.crisi.productopolis.model.response.mapper;
 
 import co.crisi.productopolis.domain.Brand;
 import co.crisi.productopolis.domain.IBrand;
 import co.crisi.productopolis.model.request.register.BrandRequest;
-import co.crisi.productopolis.model.response.register.BrandResponse;
+import co.crisi.productopolis.model.response.BrandResponse;
 import java.util.ArrayList;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -21,5 +22,8 @@ public interface BrandMapper {
     @Mapping(target = "description", expression = "java(request.description())")
     @Mapping(target = "products", expression = "java(new ArrayList<>())")
     Brand map(BrandRequest request);
+
+
+    List<BrandResponse> map(List<IBrand> brands);
 
 }

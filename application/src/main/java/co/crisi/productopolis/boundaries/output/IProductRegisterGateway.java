@@ -1,4 +1,4 @@
-package co.crisi.productopolis.boundaries.output.register;
+package co.crisi.productopolis.boundaries.output;
 
 import co.crisi.productopolis.domain.IProduct;
 

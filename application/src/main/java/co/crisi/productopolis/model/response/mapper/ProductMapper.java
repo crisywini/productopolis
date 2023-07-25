@@ -1,7 +1,7 @@
-package co.crisi.productopolis.model.response.register.mapper;
+package co.crisi.productopolis.model.response.mapper;
 
 import co.crisi.productopolis.domain.IProduct;
-import co.crisi.productopolis.model.response.register.ProductResponse;
+import co.crisi.productopolis.model.response.ProductResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
