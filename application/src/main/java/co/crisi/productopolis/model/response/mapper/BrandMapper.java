@@ -2,7 +2,7 @@ package co.crisi.productopolis.model.response.mapper;
 
 import co.crisi.productopolis.domain.Brand;
 import co.crisi.productopolis.domain.IBrand;
-import co.crisi.productopolis.model.request.register.BrandRequest;
+import co.crisi.productopolis.model.request.BrandRequest;
 import co.crisi.productopolis.model.response.BrandResponse;
 import java.util.ArrayList;
 import java.util.List;

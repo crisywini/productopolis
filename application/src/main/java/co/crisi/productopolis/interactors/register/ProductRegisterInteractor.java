@@ -6,7 +6,7 @@ import co.crisi.productopolis.boundaries.output.IProductRegisterGateway;
 import co.crisi.productopolis.domain.factory.IProductFactory;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.RepeatedProductException;
-import co.crisi.productopolis.model.request.register.ProductRequest;
+import co.crisi.productopolis.model.request.ProductRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;
 import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;

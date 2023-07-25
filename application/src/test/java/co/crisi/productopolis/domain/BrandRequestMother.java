@@ -1,6 +1,6 @@
 package co.crisi.productopolis.domain;
 
-import co.crisi.productopolis.model.request.register.BrandRequest;
+import co.crisi.productopolis.model.request.BrandRequest;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

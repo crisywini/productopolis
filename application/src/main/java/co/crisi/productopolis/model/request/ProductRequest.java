@@ -1,4 +1,4 @@
-package co.crisi.productopolis.model.request.register;
+package co.crisi.productopolis.model.request;
 
 import java.util.List;
 

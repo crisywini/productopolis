@@ -5,7 +5,7 @@ import co.crisi.productopolis.boundaries.output.IBrandRegisterGateway;
 import co.crisi.productopolis.domain.factory.IBrandFactory;
 import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.exception.RepeatedBrandException;
-import co.crisi.productopolis.model.request.register.BrandRequest;
+import co.crisi.productopolis.model.request.BrandRequest;
 import co.crisi.productopolis.model.response.BrandResponse;
 import co.crisi.productopolis.model.response.mapper.BrandMapper;
 import co.crisi.productopolis.presenter.register.IBrandRegisterPresenter;
