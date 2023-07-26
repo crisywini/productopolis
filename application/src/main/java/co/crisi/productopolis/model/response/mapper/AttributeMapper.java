@@ -1,5 +1,6 @@
 package co.crisi.productopolis.model.response.mapper;
 
+import co.crisi.productopolis.domain.Attribute;
 import co.crisi.productopolis.domain.IAttribute;
 import co.crisi.productopolis.model.request.AttributeRequest;
 import co.crisi.productopolis.model.response.AttributeResponse;
@@ -23,5 +24,7 @@ public interface AttributeMapper {
     AttributeRequest mapToRequest(IAttribute attribute);
 
     List<AttributeResponse> map(List<IAttribute> attributes);
+
+    Attribute mapToAttribute(AttributeResponse response);
 
 }
