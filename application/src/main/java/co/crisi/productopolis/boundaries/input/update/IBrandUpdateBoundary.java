@@ -4,9 +4,8 @@ import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.model.request.BrandUpdateRequest;
 import co.crisi.productopolis.model.response.BrandResponse;
 
-public interface BrandUpdateBoundary {
+public interface IBrandUpdateBoundary {
 
     BrandResponse update(BrandUpdateRequest request) throws BrandBusinessException;
-
 
 }
