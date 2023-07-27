@@ -1,12 +1,9 @@
 package co.crisi.productopolis.boundaries.output;
 
+import co.crisi.productopolis.boundaries.output.base.IExtractGateway;
 import co.crisi.productopolis.domain.IBrand;
-import java.util.List;
 
-public interface IBrandExtractGateway extends IBrandGateway{
+public interface IBrandExtractGateway extends IExtractGateway<Long, IBrand> {
 
-    List<IBrand> getAll();
-
-    IBrand getById(Long id);
 
 }

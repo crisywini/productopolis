@@ -1,12 +1,9 @@
 package co.crisi.productopolis.boundaries.output;
 
+import co.crisi.productopolis.boundaries.output.base.IExtractGateway;
 import co.crisi.productopolis.domain.IAttribute;
-import java.util.List;
 
-public interface IAttributeExtractGateway extends IAttributeGateway {
+public interface IAttributeExtractGateway extends IExtractGateway<Long, IAttribute> {
 
-    IAttribute getById(Long id);
-
-    List<IAttribute> getAll();
 
 }
