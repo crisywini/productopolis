@@ -10,6 +10,7 @@ import co.crisi.productopolis.model.response.AttributeResponse;
 import co.crisi.productopolis.model.response.mapper.AttributeMapper;
 import co.crisi.productopolis.presenter.register.IAttributeRegisterPresenter;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 
 @RequiredArgsConstructor
 public class AttributeRegisterInteractor implements IAttributeRegisterBoundary {
@@ -21,7 +22,7 @@ public class AttributeRegisterInteractor implements IAttributeRegisterBoundary {
 
     private final IAttributeRegisterGateway gateway;
 
-    private final AttributeMapper mapper;
+    private final AttributeMapper mapper = Mappers.getMapper(AttributeMapper.class);
 
     @Override
     public AttributeResponse create(AttributeRequest request) throws AttributeBusinessException {

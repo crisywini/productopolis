@@ -37,7 +37,7 @@ class AttributeRegisterInteractorTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        boundary = new AttributeRegisterInteractor(factory, presenter, gateway, mapper);
+        boundary = new AttributeRegisterInteractor(factory, presenter, gateway);
     }
 
     @Test
