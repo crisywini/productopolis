@@ -1,6 +1,6 @@
 package co.crisi.productopolis.interactors.update;
 
-import co.crisi.productopolis.boundaries.input.update.BrandUpdateBoundary;
+import co.crisi.productopolis.boundaries.input.update.IBrandUpdateBoundary;
 import co.crisi.productopolis.boundaries.output.IBrandUpdateGateway;
 import co.crisi.productopolis.domain.BrandRequestMother;
 import co.crisi.productopolis.domain.factory.IBrandFactory;
@@ -35,7 +35,7 @@ class BrandUpdateInteractorTest {
 
     private final BrandMapper mapper = Mappers.getMapper(BrandMapper.class);
 
-    private BrandUpdateBoundary boundary;
+    private IBrandUpdateBoundary boundary;
 
     @BeforeEach
     public void setUp() {

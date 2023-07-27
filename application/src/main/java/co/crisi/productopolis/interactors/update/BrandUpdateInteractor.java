@@ -1,6 +1,6 @@
 package co.crisi.productopolis.interactors.update;
 
-import co.crisi.productopolis.boundaries.input.update.BrandUpdateBoundary;
+import co.crisi.productopolis.boundaries.input.update.IBrandUpdateBoundary;
 import co.crisi.productopolis.boundaries.output.IBrandUpdateGateway;
 import co.crisi.productopolis.domain.factory.IBrandFactory;
 import co.crisi.productopolis.exception.BrandBusinessException;
@@ -12,7 +12,7 @@ import co.crisi.productopolis.presenter.update.IBrandUpdatePresenter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class BrandUpdateInteractor implements BrandUpdateBoundary {
+public class BrandUpdateInteractor implements IBrandUpdateBoundary {
 
     private final IBrandFactory factory;
 

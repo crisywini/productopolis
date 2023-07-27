@@ -8,4 +8,6 @@ public interface IAttribute {
 
     String getDescription();
 
+    String getValue();
+
 }
