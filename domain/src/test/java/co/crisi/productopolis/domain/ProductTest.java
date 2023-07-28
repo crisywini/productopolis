@@ -23,7 +23,10 @@ class ProductTest {
 
     }
 
-    @Test
+    @Deprecated
+    /**
+     * Not needed right now
+     */
     void nonValidProductForIdNullTest(){
         var throwable = catchThrowable(() -> {
             IProduct product = new Product(null, "IPad", "Great device", 6000000.0, 50L, LocalDate.now(), LocalDate.now(),

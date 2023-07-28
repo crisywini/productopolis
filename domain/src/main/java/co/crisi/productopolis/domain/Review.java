@@ -18,7 +18,7 @@ public record Review(Long id, Integer rating, String message, IProduct product, 
         var notEmptyDecorator = new NotEmptyValidatorDecorator(nonNullDecorator);
         var nonNegativeDecorator = new NonNegativeNumberValidatorDecorator(nonNullDecorator);
         var validDateDecorator = new DateValidatorDecorator(nonNullDecorator);
-        this.id = nonNullDecorator.validate(id, "id");
+        this.id = id;
         this.rating = nonNegativeDecorator.validate(rating, "rating");
         this.message = notEmptyDecorator.validate(message, "message");
         this.product = nonNullDecorator.validate(product, "product");
