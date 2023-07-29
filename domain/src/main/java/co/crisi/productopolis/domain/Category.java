@@ -16,7 +16,7 @@ public record Category(Long id, String name, String description, LocalDate creat
         var nonNullDecorator = new NonNullValidatorDecorator(validator);
         var validDateDecorator = new DateValidatorDecorator(nonNullDecorator);
         var emptyDecorator = new NotEmptyValidatorDecorator(nonNullDecorator);
-        this.id = nonNullDecorator.validate(id, "id");
+        this.id = id;
         this.name = emptyDecorator.validate(name, "name");
         this.description = emptyDecorator.validate(description, "description");
         this.creationDate = validDateDecorator.validate(creationDate, "creation date");

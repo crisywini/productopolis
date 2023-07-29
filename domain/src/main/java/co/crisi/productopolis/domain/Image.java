@@ -11,7 +11,7 @@ public record Image(Long id, String name, String url, IProduct product) implemen
         var validator = new ValidatorImpl();
         var nonNullDecorator = new NonNullValidatorDecorator(validator);
         var notEmptyDecorator = new NotEmptyValidatorDecorator(nonNullDecorator);
-        this.id = nonNullDecorator.validate(id, "id");
+        this.id = id;
         this.name = notEmptyDecorator.validate(name, "name");
         this.url = notEmptyDecorator.validate(url, "url");
         this.product = nonNullDecorator.validate(product, "product");

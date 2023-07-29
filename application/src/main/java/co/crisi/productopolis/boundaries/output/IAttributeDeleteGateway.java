@@ -1,7 +1,8 @@
 package co.crisi.productopolis.boundaries.output;
 
-public interface IAttributeDeleteGateway extends IAttributeGateway {
+import co.crisi.productopolis.boundaries.output.base.IDeleteGateway;
 
-    void deleteById(Long id);
+public interface IAttributeDeleteGateway extends IDeleteGateway<Long> {
+
 
 }

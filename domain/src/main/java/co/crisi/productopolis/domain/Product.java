@@ -23,7 +23,7 @@ public record Product(Long id, String name, String description, Double price, Lo
         var negativeNumberValidator = new NonNegativeNumberValidatorDecorator(nullValidator);
         var dateValidator = new DateValidatorDecorator(nullValidator);
         var notEmptyValidator = new NotEmptyValidatorDecorator(nullValidator);
-        this.id = nullValidator.validate(id, "id");
+        this.id = id;
         this.name = notEmptyValidator.validate(name, "name");
         this.description = notEmptyValidator.validate(description, "description");
         this.price = negativeNumberValidator.validate(price, "price");

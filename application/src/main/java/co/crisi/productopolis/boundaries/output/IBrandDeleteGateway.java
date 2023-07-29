@@ -1,7 +1,8 @@
 package co.crisi.productopolis.boundaries.output;
 
-public interface IBrandDeleteGateway extends IBrandGateway {
+import co.crisi.productopolis.boundaries.output.base.IDeleteGateway;
 
-    void deleteById(Long id);
+public interface IBrandDeleteGateway extends IDeleteGateway<Long> {
+
 
 }

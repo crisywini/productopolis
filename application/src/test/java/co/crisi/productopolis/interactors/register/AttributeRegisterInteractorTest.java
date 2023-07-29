@@ -43,17 +43,21 @@ class AttributeRegisterInteractorTest {
     @Test
     void registerWhenNotExistingAttribute_shouldPrepareSuccessfulView() throws AttributeBusinessException {
         var id = 1L;
-        var attribute = factory.create(id, "weight", "The weight of the product", "10 pounds");
+        var attribute = factory.create(null, "weight", "The weight of the product", "10 pounds");
         var request = mapper.mapToRequest(attribute);
-        var attributeResponse = mapper.map(attribute);
-        given(gateway.existsById(id))
+        var savedAttribute = factory.create(id, "weight", "The weight of the product", "10 pounds");
+        var attributeResponse = mapper.map(savedAttribute);
+
+        given(gateway.existsByName(request.name()))
                 .willReturn(false);
+        given(gateway.save(attribute))
+                .willReturn(savedAttribute);
         given(presenter.prepareSuccessfulView(attributeResponse))
                 .willReturn(attributeResponse);
 
         var response = boundary.create(request);
 
-        verify(gateway).existsById(id);
+        verify(gateway).existsByName(request.name());
         verify(gateway).save(attribute);
         verify(presenter).prepareSuccessfulView(attributeResponse);
 
@@ -68,8 +72,8 @@ class AttributeRegisterInteractorTest {
         var attribute = factory.create(id, "weight", "The weight of the product", "10 pounds");
         var request = mapper.mapToRequest(attribute);
         var throwable = new RepeatedAttributeException(
-                String.format("The attribute with id %d already exists!", request.id()));
-        given(gateway.existsById(id))
+                String.format("The attribute with name %s already exists!", request.name()));
+        given(gateway.existsByName(attribute.getName()))
                 .willReturn(true);
         given(presenter.prepareFailView(any(AttributeBusinessException.class)))
                 .willThrow(throwable);
@@ -78,7 +82,7 @@ class AttributeRegisterInteractorTest {
             var attributeResponse = boundary.create(request);
         });
 
-        verify(gateway).existsById(id);
+        verify(gateway).existsByName(attribute.getName());
         verify(presenter).prepareFailView(any(AttributeBusinessException.class));
 
         assertThat(response)

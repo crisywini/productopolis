@@ -10,7 +10,7 @@ public record Attribute(Long id, String name, String description, String value) 
         var validator = new ValidatorImpl();
         var nonNullDecorator = new NonNullValidatorDecorator(validator);
         var notEmptyDecorator = new NotEmptyValidatorDecorator(nonNullDecorator);
-        this.id = nonNullDecorator.validate(id, "id");
+        this.id = id;
         this.name = notEmptyDecorator.validate(name, "name");
         this.description = notEmptyDecorator.validate(description, "description");
         this.value = notEmptyDecorator.validate(value, "value");
