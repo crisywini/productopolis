@@ -2,6 +2,7 @@ package co.crisi.productopolis.model.response.mapper;
 
 import co.crisi.productopolis.domain.ICategory;
 import co.crisi.productopolis.model.response.CategoryResponse;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -14,5 +15,7 @@ public interface CategoryMapper {
     @Mapping(target = "creationDate", expression = "java(category.getCreationDate())")
     @Mapping(target = "lastUpdated", expression = "java(category.getLastUpdated())")
     CategoryResponse map(ICategory category);
+
+    List<CategoryResponse> map(List<ICategory> categories);
 
 }

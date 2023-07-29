@@ -2,12 +2,8 @@ package co.crisi.productopolis.boundaries.input.extract;
 
 import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.model.response.BrandResponse;
-import java.util.List;
 
-public interface IBrandExtractBoundary {
+public interface IBrandExtractBoundary extends IExtractBoundary<Long, BrandResponse, BrandBusinessException> {
 
-    BrandResponse getById(Long id) throws BrandBusinessException;
-
-    List<BrandResponse> getAll();
 
 }
