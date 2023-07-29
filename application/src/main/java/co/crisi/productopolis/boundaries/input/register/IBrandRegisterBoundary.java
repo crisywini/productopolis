@@ -4,8 +4,7 @@ import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.model.request.BrandRequest;
 import co.crisi.productopolis.model.response.BrandResponse;
 
-public interface IBrandRegisterBoundary {
+public interface IBrandRegisterBoundary extends IRegisterBoundary<BrandResponse, BrandRequest, BrandBusinessException>{
 
-    BrandResponse create(BrandRequest request) throws BrandBusinessException;
 
 }
