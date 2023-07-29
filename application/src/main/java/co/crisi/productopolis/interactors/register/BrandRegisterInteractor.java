@@ -32,9 +32,9 @@ public class BrandRegisterInteractor implements IBrandRegisterBoundary {
 
         var brand = factory.create(request.id(), request.name(), request.description());
 
-        gateway.save(brand);
+        var savedBrand = gateway.save(brand);
 
-        return presenter.prepareSuccessfulView(mapper.map(brand));
+        return presenter.prepareSuccessfulView(mapper.map(savedBrand));
     }
 
 }
