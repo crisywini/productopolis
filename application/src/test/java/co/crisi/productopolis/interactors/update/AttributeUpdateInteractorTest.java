@@ -44,7 +44,7 @@ class AttributeUpdateInteractorTest {
     @Test
     void updateWhenExistingAttribute_shouldPrepareSuccessfulView() throws AttributeBusinessException {
         var request = AttributeUpdateRequestMother.random();
-        var attribute = factory.create(request.attributeInfo().id(), request.attributeInfo().name(),
+        var attribute = factory.create(request.attributeId(), request.attributeInfo().name(),
                 request.attributeInfo().description(), request.attributeInfo().value());
         var expectedResponse = mapper.map(attribute);
         given(gateway.existsById(request.attributeId()))

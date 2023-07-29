@@ -12,15 +12,12 @@ public class AttributeUpdateRequestMother {
 
     public AttributeUpdateRequest random() {
         var id= random.nextLong(0, 10);
-        return new AttributeUpdateRequest(id, randomRequestWithId(id));
+        return new AttributeUpdateRequest(id, randomRequest());
     }
 
     public AttributeRequest randomRequest() {
-        return new AttributeRequest(random.nextLong(0, 10), "Weight", "The weight of the product", "12L");
+        return new AttributeRequest("Weight", "The weight of the product", "12L");
     }
 
-    public AttributeRequest randomRequestWithId(Long id) {
-        return new AttributeRequest(id, "Weight", "The weight of the product", "12L");
-    }
 
 }

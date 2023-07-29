@@ -26,16 +26,16 @@ public class AttributeRegisterInteractor implements IAttributeRegisterBoundary {
     @Override
     public AttributeResponse create(AttributeRequest request) throws AttributeBusinessException {
 
-        if (gateway.existsById(request.id())) {
+        if (gateway.existsByName(request.name())) {
             return presenter.prepareFailView(new RepeatedAttributeException(
-                    String.format("The attribute with id %d already exists!", request.id())));
+                    String.format("The attribute with name %s already exists!", request.name())));
         }
 
-        var attribute = factory.create(request.id(), request.name(), request.description(), request.value());
+        var attribute = factory.create(null, request.name(), request.description(), request.value());
 
-        gateway.save(attribute);
+        var savedAttribute = gateway.save(attribute);
 
-        return presenter.prepareSuccessfulView(mapper.map(attribute));
+        return presenter.prepareSuccessfulView(mapper.map(savedAttribute));
     }
 
 }
