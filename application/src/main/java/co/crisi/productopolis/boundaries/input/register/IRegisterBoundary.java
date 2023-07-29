@@ -2,8 +2,8 @@ package co.crisi.productopolis.boundaries.input.register;
 
 import co.crisi.productopolis.exception.BusinessException;
 
-public interface IRegisterBoundary<T, U, E extends BusinessException> {
+public interface IRegisterBoundary<R, RQ, E extends BusinessException> {
 
-    T create(U request) throws E;
+    R create(RQ request) throws E;
 
 }
