@@ -1,12 +1,11 @@
 package co.crisi.productopolis.presenter.register;
 
+import co.crisi.productopolis.exception.BusinessException;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.model.response.ProductResponse;
+import co.crisi.productopolis.presenter.IPresenter;
 
-public interface IProductRegisterPresenter {
+public interface IProductRegisterPresenter extends IPresenter<ProductResponse, BusinessException> {
 
-    ProductResponse prepareSuccessfulView(ProductResponse response);
-
-    ProductResponse prepareFailView(ProductBusinessException exception) throws ProductBusinessException;
 
 }
