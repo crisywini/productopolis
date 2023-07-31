@@ -85,7 +85,7 @@ class CategoryExtractInteractorTest {
     }
 
     @Test
-    void getAll_shouldPrepareSuccessfulView() throws CategoryBusinessException {
+    void getAll_shouldPrepareSuccessfulView()  {
         var categoryOne = factory.create(1L, "computers", "a computer or system computer based like");
         var categoryTwo = factory.create(2L, "tablet", "a tablet or system tablet based like");
         var categories = List.of(categoryOne, categoryTwo);
