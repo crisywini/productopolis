@@ -4,8 +4,8 @@ import co.crisi.productopolis.exception.AttributeBusinessException;
 import co.crisi.productopolis.model.request.AttributeUpdateRequest;
 import co.crisi.productopolis.model.response.AttributeResponse;
 
-public interface IAttributeUpdateBoundary {
+public interface IAttributeUpdateBoundary extends
+        IUpdateBoundary<AttributeResponse, AttributeUpdateRequest, AttributeBusinessException> {
 
-    AttributeResponse update(AttributeUpdateRequest request) throws AttributeBusinessException;
 
 }
