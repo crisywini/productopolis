@@ -2,11 +2,9 @@ package co.crisi.productopolis.presenter.update;
 
 import co.crisi.productopolis.exception.BrandBusinessException;
 import co.crisi.productopolis.model.response.BrandResponse;
+import co.crisi.productopolis.presenter.IPresenter;
 
-public interface IBrandUpdatePresenter {
+public interface IBrandUpdatePresenter extends IPresenter<BrandResponse, BrandBusinessException> {
 
-    BrandResponse prepareSuccessfulView(BrandResponse response);
-
-    BrandResponse prepareFailView(BrandBusinessException exception) throws BrandBusinessException;
 
 }
