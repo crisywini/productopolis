@@ -1,24 +1,20 @@
 package co.crisi.productopolis.interactors.register;
 
-import co.crisi.productopolis.boundaries.input.extract.IBrandExtractBoundary;
 import co.crisi.productopolis.boundaries.input.register.IProductRegisterBoundary;
 import co.crisi.productopolis.boundaries.output.IAttributeExtractGateway;
 import co.crisi.productopolis.boundaries.output.IBrandExtractGateway;
 import co.crisi.productopolis.boundaries.output.ICategoryExtractGateway;
 import co.crisi.productopolis.boundaries.output.IProductRegisterGateway;
-import co.crisi.productopolis.boundaries.output.base.IExtractGateway;
 import co.crisi.productopolis.domain.factory.IProductFactory;
 import co.crisi.productopolis.exception.AttributeNotFoundException;
 import co.crisi.productopolis.exception.BrandNotFoundException;
 import co.crisi.productopolis.exception.BusinessException;
 import co.crisi.productopolis.exception.CategoryNotFoundException;
-import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.RepeatedProductException;
 import co.crisi.productopolis.model.request.ProductRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;
 import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
@@ -73,17 +69,22 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var brand = brandExtractGateway.getById(request.brandId());
 
         var attributes = request.attributeIds().stream()
-                .map(id -> attributeExtractGateway.getById(id))
+                .map(attributeExtractGateway::getById)
                 .toList();
         var categories = request.categoryIds().stream()
-                .map(id -> categoryExtractGateway.getById(id))
+                .map(categoryExtractGateway::getById)
                 .toList();
+        try {
+            var product = factory.create(request.id(), request.name(), request.description(), request.price(),
+                    request.stock(),
+                    request.isFeatured(), request.isActive(), brand, attributes, categories);
+            var productSaved = gateway.save(product);
+            return presenter.prepareSuccessfulView(productMapper.map(productSaved));
+        } catch (RuntimeException e) {
+            return presenter.prepareFailView(new BusinessException(e.getMessage()));
+        }
 
-        var product = factory.create(request.id(), request.name(), request.description(), request.price(),
-                request.stock(),
-                request.isFeatured(), request.isActive(), brand, attributes, categories);
-        var productSaved = gateway.save(product);
-        return presenter.prepareSuccessfulView(productMapper.map(productSaved));
+
     }
 
 }
