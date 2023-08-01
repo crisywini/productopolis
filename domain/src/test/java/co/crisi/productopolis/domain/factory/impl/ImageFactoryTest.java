@@ -2,7 +2,7 @@ package co.crisi.productopolis.domain.factory.impl;
 
 import co.crisi.productopolis.domain.exception.NullFieldException;
 import co.crisi.productopolis.domain.factory.IImageFactory;
-import co.crisi.productopolis.domain.objectmother.ProductObjectMother;
+import co.crisi.productopolis.domain.objectmother.ProductMother;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +16,7 @@ class ImageFactoryTest {
     @Test
     void createWithCorrectFields_shouldCreate() {
         var image = factory.create(1L, "image_from_side.jpeg", "/somewhere/in/a/linux/system/hopefully.jpeg",
-                ProductObjectMother.random());
+                ProductMother.random());
         assertThat(image)
                 .isNotNull();
     }

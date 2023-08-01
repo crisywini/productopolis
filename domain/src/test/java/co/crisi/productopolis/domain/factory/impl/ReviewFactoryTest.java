@@ -2,7 +2,7 @@ package co.crisi.productopolis.domain.factory.impl;
 
 import co.crisi.productopolis.domain.exception.NullFieldException;
 import co.crisi.productopolis.domain.factory.IReviewFactory;
-import co.crisi.productopolis.domain.objectmother.ProductObjectMother;
+import co.crisi.productopolis.domain.objectmother.ProductMother;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +14,7 @@ class ReviewFactoryTest {
 
     @Test
     void createWithCorrectFields_shouldCreate() {
-        var review = factory.create(1L, 5, "great product", ProductObjectMother.random(), 1L);
+        var review = factory.create(1L, 5, "great product", ProductMother.random(), 1L);
         assertThat(review)
                 .isNotNull();
     }
