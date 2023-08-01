@@ -25,9 +25,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 class ProductRegisterInteractorTest {
 
@@ -79,8 +82,14 @@ class ProductRegisterInteractorTest {
         ArgumentCaptor<IProduct> productCaptor = ArgumentCaptor.forClass(IProduct.class);
 
         var productResponse = boundary.create(productRequest);
-        System.out.println(productCaptor.capture());
 
+        verify(gateway).existsById(productRequest.id());
+        verify(brandExtractGateway).existsById(productRequest.brandId());
+        verify(attributeExtractGateway, times(2)).existsById(anyLong());
+        verify(categoryExtractGateway, times(2)).existsById(anyLong());
+        assertThat(productResponse)
+                .isNotNull()
+                .isEqualTo(response);
     }
 
     private void givenExistenceForHappyPath(ProductRequest request){
