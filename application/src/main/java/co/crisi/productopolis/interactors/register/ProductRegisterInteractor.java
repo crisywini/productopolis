@@ -75,12 +75,11 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
     }
 
     private Either<BusinessException, ProductRequest> validateAttributesExistence(ProductRequest request) {
-        var attIds = request.attributeIds().stream()
-                .allMatch(attributeExtractGateway::existsById);
+        var idsNotFound = request.attributeIds().stream()
+                .filter(id -> !attributeExtractGateway.existsById(id))
+                .toList();
 
-        if (!attIds) {
-            var idsNotFound = request.attributeIds().stream()
-                    .filter(id -> !attributeExtractGateway.existsById(id)).toList();
+        if (!idsNotFound.isEmpty()) {
             return Either.left(
                     new AttributeNotFoundException("The ids " + idsNotFound + " were not found!"));
         }
@@ -88,12 +87,11 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
     }
 
     private Either<BusinessException, ProductRequest> validateCategoriesExistence(ProductRequest request) {
-        var catIds = request.categoryIds().stream()
-                .allMatch(categoryExtractGateway::existsById);
+        var idsNotFound = request.categoryIds().stream()
+                .filter(id -> !categoryExtractGateway.existsById(id))
+                .toList();
 
-        if (!catIds) {
-            var idsNotFound = request.categoryIds().stream()
-                    .filter(id -> !categoryExtractGateway.existsById(id)).toList();
+        if (!idsNotFound.isEmpty()) {
             return Either.left(
                     new CategoryNotFoundException("The ids " + idsNotFound + " were not found!"));
         }

@@ -13,7 +13,7 @@ import co.crisi.productopolis.domain.objectmother.AttributeMother;
 import co.crisi.productopolis.domain.objectmother.BrandMother;
 import co.crisi.productopolis.domain.objectmother.CategoryMother;
 import co.crisi.productopolis.domain.objectmother.ProductMother;
-import co.crisi.productopolis.exception.BusinessException;
+import co.crisi.productopolis.exception.*;
 import co.crisi.productopolis.model.request.ProductRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;
@@ -26,6 +26,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
@@ -63,7 +64,6 @@ class ProductRegisterInteractorTest {
 
     @Test
     void createWhenNonExistingProduct_shouldPrepareSuccessfulView() throws BusinessException {
-        var productId = 1L;
         var productRequest = ProductRequestMother.random();
         var product = ProductMother.random();
         var response = mapper.map(product);
@@ -101,5 +101,70 @@ class ProductRegisterInteractorTest {
                 .willReturn(true);
         given(categoryExtractGateway.existsById(anyLong()))
                 .willReturn(true);
+    }
+
+    @Test
+    void createWhenExistingProduct_shouldPrepareFailView() throws BusinessException {
+        var request = ProductRequestMother.random();
+        var throwable = new RepeatedProductException(String
+                .format("Product with id %d already exists!", request.id()));
+        given(gateway.existsById(request.id()))
+                .willReturn(true);
+        given(presenter.prepareFailView(any(BusinessException.class)))
+                .willThrow(throwable);
+        var response = catchThrowable(() -> {
+            var productResponse = boundary.create(request);
+        });
+        verify(gateway).existsById(request.id());
+        verify(presenter).prepareFailView(any(BusinessException.class));
+        assertThat(response)
+                .isEqualTo(throwable);
+    }
+    @Test
+    void createWhenExistingProductAndNoExistingBrand_shouldPrepareFailView() throws BusinessException {
+        var request = ProductRequestMother.random();
+        var throwable = new BrandNotFoundException(
+                String.format("The brand with id %d was not found!", request.brandId()));
+        given(gateway.existsById(request.id()))
+                .willReturn(false);
+        given(brandExtractGateway.existsById(request.brandId()))
+                .willReturn(false);
+        given(presenter.prepareFailView(any(BusinessException.class)))
+                .willThrow(throwable);
+        var response = catchThrowable(() -> {
+            var productResponse = boundary.create(request);
+        });
+        verify(gateway).existsById(request.id());
+        verify(brandExtractGateway).existsById(request.brandId());
+        verify(presenter).prepareFailView(any(BusinessException.class));
+        assertThat(response)
+                .isEqualTo(throwable);
+    }
+
+    @Test
+    void createWhenExistingProductAndNoExistingAttribute_shouldPrepareFailView() throws BusinessException {
+        var request = ProductRequestMother.random();
+        var idsNotFound  = request.categoryIds();
+        var throwable = new CategoryNotFoundException("The ids " + idsNotFound + " were not found!");
+        given(gateway.existsById(request.id()))
+                .willReturn(false);
+        given(brandExtractGateway.existsById(request.brandId()))
+                .willReturn(true);
+        given(attributeExtractGateway.existsById(anyLong()))
+                .willReturn(true);
+        given(categoryExtractGateway.existsById(anyLong()))
+                .willReturn(false);
+        given(presenter.prepareFailView(any(BusinessException.class)))
+                .willThrow(throwable);
+        var response = catchThrowable(() -> {
+            var productResponse = boundary.create(request);
+        });
+        verify(gateway).existsById(request.id());
+        verify(brandExtractGateway).existsById(request.brandId());
+        verify(attributeExtractGateway, times(2)).existsById(anyLong());
+        verify(categoryExtractGateway, times(2)).existsById(anyLong());
+        verify(presenter).prepareFailView(any(BusinessException.class));
+        assertThat(response)
+                .isEqualTo(throwable);
     }
 }
