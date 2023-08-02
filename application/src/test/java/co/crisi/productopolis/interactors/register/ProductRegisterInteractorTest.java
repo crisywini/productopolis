@@ -30,8 +30,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class ProductRegisterInteractorTest {
 
@@ -144,6 +143,30 @@ class ProductRegisterInteractorTest {
     @Test
     void createWhenExistingProductAndNoExistingAttribute_shouldPrepareFailView() throws BusinessException {
         var request = ProductRequestMother.random();
+        var idsNotFound  = request.attributeIds();
+        var throwable = new AttributeNotFoundException("The ids " + idsNotFound + " were not found!");
+        given(gateway.existsById(request.id()))
+                .willReturn(false);
+        given(brandExtractGateway.existsById(request.brandId()))
+                .willReturn(true);
+        given(attributeExtractGateway.existsById(anyLong()))
+                .willReturn(false);
+        given(presenter.prepareFailView(any(BusinessException.class)))
+                .willThrow(throwable);
+        var response = catchThrowable(() -> {
+            var productResponse = boundary.create(request);
+        });
+        verify(gateway).existsById(request.id());
+        verify(brandExtractGateway).existsById(request.brandId());
+        verify(attributeExtractGateway, times(2)).existsById(anyLong());
+        verify(presenter).prepareFailView(any(BusinessException.class));
+        assertThat(response)
+                .isEqualTo(throwable);
+    }
+
+    @Test
+    void createWhenExistingProductAndNoExistingCategory_shouldPrepareFailView() throws BusinessException {
+        var request = ProductRequestMother.random();
         var idsNotFound  = request.categoryIds();
         var throwable = new CategoryNotFoundException("The ids " + idsNotFound + " were not found!");
         given(gateway.existsById(request.id()))
@@ -167,4 +190,32 @@ class ProductRegisterInteractorTest {
         assertThat(response)
                 .isEqualTo(throwable);
     }
+
+    @Test
+    void createWhenExistingProductAndNoExistingAttributeAndCategory_shouldPrepareFailView() throws BusinessException {
+        var request = ProductRequestMother.random();
+        var idsNotFound  = request.attributeIds();
+        var throwable = new AttributeNotFoundException("The ids " + idsNotFound + " were not found!");
+        given(gateway.existsById(request.id()))
+                .willReturn(false);
+        given(brandExtractGateway.existsById(request.brandId()))
+                .willReturn(true);
+        given(attributeExtractGateway.existsById(anyLong()))
+                .willReturn(false);
+        given(categoryExtractGateway.existsById(anyLong()))
+                .willReturn(false);
+        given(presenter.prepareFailView(any(BusinessException.class)))
+                .willThrow(throwable);
+        var response = catchThrowable(() -> {
+            var productResponse = boundary.create(request);
+        });
+        verify(gateway).existsById(request.id());
+        verify(brandExtractGateway).existsById(request.brandId());
+        verify(attributeExtractGateway, times(2)).existsById(anyLong());
+        verifyNoInteractions(categoryExtractGateway);
+        verify(presenter).prepareFailView(any(BusinessException.class));
+        assertThat(response)
+                .isEqualTo(throwable);
+    }
+
 }
