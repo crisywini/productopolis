@@ -17,8 +17,10 @@ import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;
 import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
 import io.vavr.control.Either;
+import io.vavr.control.Try;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
+
 
 @RequiredArgsConstructor
 public class ProductRegisterInteractor implements IProductRegisterBoundary {
@@ -43,19 +45,14 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var productExistenceEither = validateProductExistence(request)
                 .flatMap(this::validateBrandExistence)
                 .flatMap(this::validateAttributesExistence)
-                .flatMap(this::validateCategoriesExistence);
+                .flatMap(this::validateCategoriesExistence)
+                .flatMap(this::createProduct)
+                .map(productMapper::map);
 
-        if (productExistenceEither.isLeft()) {
-            return presenter.prepareFailView(productExistenceEither.getLeft());
-        }
-        var req = productExistenceEither.right().get();
-        var productEither = createProduct(req);
-
-        if (productEither.isRight()) {
-            return presenter.prepareSuccessfulView(productMapper.map(productEither.get()));
-        }
-        return presenter.prepareFailView(productEither.getLeft());
-
+        return productExistenceEither.isLeft() ?
+                presenter.prepareFailView(productExistenceEither.getLeft())
+                :
+                presenter.prepareSuccessfulView(productExistenceEither.get());
     }
 
     private Either<BusinessException, ProductRequest> validateProductExistence(ProductRequest request) {
@@ -107,14 +104,15 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var categories = request.categoryIds().stream()
                 .map(categoryExtractGateway::getById)
                 .toList();
-        try {
-            var product = factory.create(request.id(), request.name(), request.description(), request.price(),
-                    request.stock(),
-                    request.isFeatured(), request.isActive(), brand, attributes, categories);
-            return Either.right(product);
-        } catch (RuntimeException e) {
-            return Either.left(new BusinessException(e.getMessage()));
-        }
+
+        return Try.of(() -> factory.create(request.id(), request.name(), request.description(), request.price(),
+                        request.stock(),
+                        request.isFeatured(), request.isActive(), brand, attributes, categories))
+                .map(Either::<BusinessException, IProduct>right)
+                .recover(e -> Either.left(new BusinessException(e.getMessage())))
+                .getOrElse(Either.left(new BusinessException("Unkown!")));
+
+
     }
 
 }
