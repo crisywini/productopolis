@@ -42,17 +42,13 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
 
     @Override
     public ProductResponse create(ProductRequest request) throws BusinessException {
-        var productExistenceEither = validateProductExistence(request)
+        return validateProductExistence(request)
                 .flatMap(this::validateBrandExistence)
                 .flatMap(this::validateAttributesExistence)
                 .flatMap(this::validateCategoriesExistence)
                 .flatMap(this::createProduct)
-                .map(productMapper::map);
-
-        return productExistenceEither.isLeft() ?
-                presenter.prepareFailView(productExistenceEither.getLeft())
-                :
-                presenter.prepareSuccessfulView(productExistenceEither.get());
+                .map(productMapper::map)
+                .fold(presenter::prepareFailView, presenter::prepareSuccessfulView);
     }
 
     private Either<BusinessException, ProductRequest> validateProductExistence(ProductRequest request) {
@@ -104,13 +100,11 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var categories = request.categoryIds().stream()
                 .map(categoryExtractGateway::getById)
                 .toList();
-
         return Try.of(() -> factory.create(request.id(), request.name(), request.description(), request.price(),
                         request.stock(),
                         request.isFeatured(), request.isActive(), brand, attributes, categories))
-                .map(Either::<BusinessException, IProduct>right)
-                .recover(e -> Either.left(new BusinessException(e.getMessage())))
-                .getOrElse(Either.left(new BusinessException("Unkown!")));
+                .toEither()
+                .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
 
 
     }
