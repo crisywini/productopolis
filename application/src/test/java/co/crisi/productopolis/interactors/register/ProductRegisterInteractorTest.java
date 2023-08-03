@@ -34,8 +34,6 @@ import static org.mockito.Mockito.*;
 
 class ProductRegisterInteractorTest {
 
-    private final IProductFactory factory = new ProductFactory();
-
     private final ProductMapper mapper = Mappers.getMapper(ProductMapper.class);
 
     @Mock
@@ -58,7 +56,7 @@ class ProductRegisterInteractorTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        boundary = new ProductRegisterInteractor(factory, gateway, presenter, brandExtractGateway, attributeExtractGateway, categoryExtractGateway);
+        boundary = new ProductRegisterInteractor(gateway, presenter, brandExtractGateway, attributeExtractGateway, categoryExtractGateway);
     }
 
     @Test
@@ -78,7 +76,6 @@ class ProductRegisterInteractorTest {
                 .willReturn(category);
         given(presenter.prepareSuccessfulView(any(ProductResponse.class)))
                 .willReturn(response);
-        ArgumentCaptor<IProduct> productCaptor = ArgumentCaptor.forClass(IProduct.class);
 
         var productResponse = boundary.create(productRequest);
 
@@ -86,6 +83,7 @@ class ProductRegisterInteractorTest {
         verify(brandExtractGateway).existsById(productRequest.brandId());
         verify(attributeExtractGateway, times(2)).existsById(anyLong());
         verify(categoryExtractGateway, times(2)).existsById(anyLong());
+        verify(presenter).prepareSuccessfulView(response);
         assertThat(productResponse)
                 .isNotNull()
                 .isEqualTo(response);

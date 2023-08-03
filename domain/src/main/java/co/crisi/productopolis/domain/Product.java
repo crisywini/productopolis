@@ -7,13 +7,14 @@ import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecora
 import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.Builder;
 
 
 public record Product(Long id, String name, String description, Double price, Long stock,
                       LocalDate creationDate, LocalDate lastUpdated, Boolean isFeatured, Boolean isActive,
                       IBrand brand, List<IAttribute> attributes, List<ICategory> categories,
                       List<IReview> reviews, List<IImage> images) implements IProduct {
-
+    @Builder
     public Product(Long id, String name, String description, Double price, Long stock,
             LocalDate creationDate, LocalDate lastUpdated, Boolean isFeatured, Boolean isActive,
             IBrand brand, List<IAttribute> attributes, List<ICategory> categories,
