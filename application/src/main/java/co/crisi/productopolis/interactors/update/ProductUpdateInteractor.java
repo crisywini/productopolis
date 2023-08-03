@@ -13,8 +13,6 @@ import co.crisi.productopolis.exception.BusinessException;
 import co.crisi.productopolis.exception.CategoryNotFoundException;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.ProductNotFoundException;
-import co.crisi.productopolis.interactors.ProductValidatorInteractor;
-import co.crisi.productopolis.model.request.ProductRequest;
 import co.crisi.productopolis.model.request.ProductUpdateRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;

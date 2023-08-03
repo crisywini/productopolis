@@ -1,4 +1,4 @@
-package co.crisi.productopolis.interactors;
+package co.crisi.productopolis.interactors.experimental.validator;
 
 import co.crisi.productopolis.boundaries.output.IAttributeExtractGateway;
 import co.crisi.productopolis.boundaries.output.IBrandExtractGateway;
@@ -12,7 +12,6 @@ import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.RepeatedProductException;
 import co.crisi.productopolis.model.request.ProductRequest;
 import co.crisi.productopolis.model.request.ProductUpdateRequest;
-import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
 import io.vavr.control.Either;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
