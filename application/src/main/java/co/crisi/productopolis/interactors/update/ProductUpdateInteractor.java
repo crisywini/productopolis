@@ -60,14 +60,14 @@ public class ProductUpdateInteractor implements IProductUpdateBoundary {
                         String.format("The product with id %d was not found!", request.productId())));
     }
 
-    public Either<BusinessException, ProductUpdateRequest> validateSameProductId(ProductUpdateRequest request) {
+    private Either<BusinessException, ProductUpdateRequest> validateSameProductId(ProductUpdateRequest request) {
         if (Objects.nonNull(request.newInfo().id()) && request.productId().equals(request.newInfo().id())) {
             return Either.right(request);
         }
         return Either.left(new ProductBusinessException("The product ids are different!"));
     }
 
-    public Either<BusinessException, ProductUpdateRequest> validateBrandExistence(ProductUpdateRequest request) {
+    private Either<BusinessException, ProductUpdateRequest> validateBrandExistence(ProductUpdateRequest request) {
         if (!brandExtractGateway.existsById(request.newInfo().brandId())) {
             return Either.left(new BrandNotFoundException(
                     String.format("The brand with id %d was not found!", request.newInfo().brandId())));
@@ -75,7 +75,7 @@ public class ProductUpdateInteractor implements IProductUpdateBoundary {
         return Either.right(request);
     }
 
-    public Either<BusinessException, ProductUpdateRequest> validateAttributesExistence(ProductUpdateRequest request) {
+    private Either<BusinessException, ProductUpdateRequest> validateAttributesExistence(ProductUpdateRequest request) {
         var idsNotFound = request.newInfo().attributeIds().stream()
                 .filter(id -> !attributeExtractGateway.existsById(id))
                 .toList();
@@ -87,7 +87,7 @@ public class ProductUpdateInteractor implements IProductUpdateBoundary {
         return Either.right(request);
     }
 
-    public Either<BusinessException, ProductUpdateRequest> validateCategoriesExistence(ProductUpdateRequest request) {
+    private Either<BusinessException, ProductUpdateRequest> validateCategoriesExistence(ProductUpdateRequest request) {
         var idsNotFound = request.newInfo().categoryIds().stream()
                 .filter(id -> !categoryExtractGateway.existsById(id))
                 .toList();
