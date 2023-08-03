@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class ProductAttributeJpaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,5 +23,13 @@ public class ProductAttributeJpaEntity {
     private AttributeJpaEntity attribute;
 
     private String value;
+
+    public ProductJpaEntity getProduct() {
+        return new ProductJpaEntity(product);
+    }
+
+    public AttributeJpaEntity getAttribute() {
+        return new AttributeJpaEntity(attribute);
+    }
 
 }

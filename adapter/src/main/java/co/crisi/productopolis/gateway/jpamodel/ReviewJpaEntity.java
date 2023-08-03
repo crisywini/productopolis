@@ -36,6 +36,10 @@ public class ReviewJpaEntity {
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
+    public ProductJpaEntity getProduct() {
+        return new ProductJpaEntity(product);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

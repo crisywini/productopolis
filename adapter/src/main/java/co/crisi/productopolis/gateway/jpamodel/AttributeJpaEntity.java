@@ -27,6 +27,12 @@ public class AttributeJpaEntity {
 
     private String description;
 
+    public AttributeJpaEntity(AttributeJpaEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.description = entity.getDescription();
+    }
+
 
     @Override
     public boolean equals(Object o) {

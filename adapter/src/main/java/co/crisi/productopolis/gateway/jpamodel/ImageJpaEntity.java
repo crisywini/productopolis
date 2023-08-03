@@ -33,6 +33,10 @@ public class ImageJpaEntity {
     @JoinColumn(name = "product_id")
     private ProductJpaEntity product;
 
+    public ProductJpaEntity getProduct() {
+        return new ProductJpaEntity(product);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

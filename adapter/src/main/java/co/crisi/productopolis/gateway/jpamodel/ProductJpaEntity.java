@@ -69,6 +69,23 @@ public class ProductJpaEntity {
     @OneToMany(mappedBy = "product")
     private List<ReviewJpaEntity> reviews;
 
+    public ProductJpaEntity(ProductJpaEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.description = entity.getDescription();
+        this.price = entity.getPrice();
+        this.stock = entity.getStock();
+        this.creationDate = entity.getCreationDate();
+        this.lastUpdate = entity.getLastUpdate();
+        this.featured = entity.featured;
+        this.active = entity.active;
+        this.brand = entity.getBrand();
+        this.attributes = entity.getAttributes();
+        this.categories = entity.getCategories();
+        this.images = entity.getImages();
+        this.reviews = entity.getReviews();
+    }
+
     public List<ProductAttributeJpaEntity> getAttributes() {
         return List.copyOf(this.attributes);
     }
