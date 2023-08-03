@@ -1,5 +1,6 @@
 package co.crisi.productopolis.interactors.experimental.validator;
 
+import co.crisi.productopolis.annotations.ExperimentalFeature;
 import co.crisi.productopolis.boundaries.output.IAttributeExtractGateway;
 import co.crisi.productopolis.boundaries.output.IBrandExtractGateway;
 import co.crisi.productopolis.boundaries.output.ICategoryExtractGateway;
@@ -16,6 +17,7 @@ import io.vavr.control.Either;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 
+@ExperimentalFeature
 @RequiredArgsConstructor
 public class ProductValidatorInteractor {
 
