@@ -1,7 +1,6 @@
 package co.crisi.productopolis.boundaries.input.register;
 
 import co.crisi.productopolis.exception.BusinessException;
-import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.model.request.ProductRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 
