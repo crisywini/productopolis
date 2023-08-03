@@ -7,7 +7,6 @@ import co.crisi.productopolis.boundaries.output.ICategoryExtractGateway;
 import co.crisi.productopolis.boundaries.output.IProductRegisterGateway;
 import co.crisi.productopolis.domain.IProduct;
 import co.crisi.productopolis.domain.Product;
-import co.crisi.productopolis.domain.factory.IProductFactory;
 import co.crisi.productopolis.exception.AttributeNotFoundException;
 import co.crisi.productopolis.exception.BrandNotFoundException;
 import co.crisi.productopolis.exception.BusinessException;
@@ -26,9 +25,7 @@ import org.mapstruct.factory.Mappers;
 
 @RequiredArgsConstructor
 public class ProductRegisterInteractor implements IProductRegisterBoundary {
-
-    private final IProductFactory factory;
-
+    
     private final IProductRegisterGateway gateway;
 
     private final IProductRegisterPresenter presenter;
