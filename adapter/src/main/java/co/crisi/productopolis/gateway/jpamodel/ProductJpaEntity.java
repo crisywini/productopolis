@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class ProductJpaEntity {
 
     @Id
@@ -66,6 +68,26 @@ public class ProductJpaEntity {
 
     @OneToMany(mappedBy = "product")
     private List<ReviewJpaEntity> reviews;
+
+    public List<ProductAttributeJpaEntity> getAttributes() {
+        return List.copyOf(this.attributes);
+    }
+
+    public List<CategoryJpaEntity> getCategories() {
+        return List.copyOf(this.categories);
+    }
+
+    public List<ImageJpaEntity> getImages() {
+        return List.copyOf(this.images);
+    }
+
+    public List<ReviewJpaEntity> getReviews() {
+        return List.copyOf(this.reviews);
+    }
+
+    public BrandJpaEntity getBrand() {
+        return new BrandJpaEntity(brand);
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -33,6 +33,17 @@ public class BrandJpaEntity {
     @OneToMany(mappedBy = "brand")
     private List<ProductJpaEntity> products;
 
+    public BrandJpaEntity(BrandJpaEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.description = entity.getDescription();
+        this.products = entity.getProducts();
+    }
+
+    public List<ProductJpaEntity> getProducts() {
+        return List.copyOf(products);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
