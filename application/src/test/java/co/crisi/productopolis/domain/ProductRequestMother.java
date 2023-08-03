@@ -16,7 +16,7 @@ public class ProductRequestMother {
                 .attributeIds(List.of(3L, 2L))
                 .price(6000000.0)
                 .stock(1000000L)
-                .name("Ipad")
+                .name("The name of the Wind")
                 .description("an Ipad for students")
                 .isActive(true)
                 .isFeatured(true)

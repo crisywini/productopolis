@@ -78,7 +78,6 @@ class ProductRegisterInteractorTest {
                 .willReturn(category);
         given(presenter.prepareSuccessfulView(any(ProductResponse.class)))
                 .willReturn(response);
-        ArgumentCaptor<IProduct> productCaptor = ArgumentCaptor.forClass(IProduct.class);
 
         var productResponse = boundary.create(productRequest);
 
@@ -86,6 +85,7 @@ class ProductRegisterInteractorTest {
         verify(brandExtractGateway).existsById(productRequest.brandId());
         verify(attributeExtractGateway, times(2)).existsById(anyLong());
         verify(categoryExtractGateway, times(2)).existsById(anyLong());
+        verify(presenter).prepareSuccessfulView(response);
         assertThat(productResponse)
                 .isNotNull()
                 .isEqualTo(response);

@@ -6,6 +6,7 @@ import co.crisi.productopolis.boundaries.output.IBrandExtractGateway;
 import co.crisi.productopolis.boundaries.output.ICategoryExtractGateway;
 import co.crisi.productopolis.boundaries.output.IProductRegisterGateway;
 import co.crisi.productopolis.domain.IProduct;
+import co.crisi.productopolis.domain.Product;
 import co.crisi.productopolis.domain.factory.IProductFactory;
 import co.crisi.productopolis.exception.AttributeNotFoundException;
 import co.crisi.productopolis.exception.BrandNotFoundException;
@@ -18,6 +19,7 @@ import co.crisi.productopolis.model.response.mapper.ProductMapper;
 import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
@@ -91,7 +93,7 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         return Either.right(request);
     }
 
-    private Either<BusinessException, IProduct> createProduct(ProductRequest request) {
+    private Either<BusinessException, ? extends IProduct> createProduct(ProductRequest request) {
         var brand = brandExtractGateway.getById(request.brandId());
 
         var attributes = request.attributeIds().stream()
@@ -100,9 +102,20 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var categories = request.categoryIds().stream()
                 .map(categoryExtractGateway::getById)
                 .toList();
-        return Try.of(() -> factory.create(request.id(), request.name(), request.description(), request.price(),
-                        request.stock(),
-                        request.isFeatured(), request.isActive(), brand, attributes, categories))
+        return Try.of(() -> Product.builder()
+                        .id(request.id())
+                        .name(request.name())
+                        .description(request.description())
+                        .price(request.price())
+                        .stock(request.stock())
+                        .isFeatured(request.isFeatured())
+                        .isActive(request.isActive())
+                        .brand(brand)
+                        .attributes(attributes)
+                        .categories(categories)
+                        .creationDate(LocalDate.now())
+                        .lastUpdated(LocalDate.now())
+                        .build())
                 .toEither()
                 .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
 
