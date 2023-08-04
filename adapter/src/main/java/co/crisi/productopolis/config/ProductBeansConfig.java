@@ -11,7 +11,6 @@ import co.crisi.productopolis.boundaries.output.IProductDeleteGateway;
 import co.crisi.productopolis.boundaries.output.IProductExtractGateway;
 import co.crisi.productopolis.boundaries.output.IProductRegisterGateway;
 import co.crisi.productopolis.boundaries.output.IProductUpdateGateway;
-import co.crisi.productopolis.gateway.postgresql.register.ProductRegisterPostgresGateway;
 import co.crisi.productopolis.interactors.delete.ProductDeleteInteractor;
 import co.crisi.productopolis.interactors.extract.ProductExtractInteractor;
 import co.crisi.productopolis.interactors.register.ProductRegisterInteractor;
