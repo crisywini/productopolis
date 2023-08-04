@@ -1,13 +1,16 @@
 package co.crisi.productopolis.config;
 
+import co.crisi.productopolis.boundaries.input.delete.IBrandDeleteBoundary;
 import co.crisi.productopolis.boundaries.input.extract.IBrandExtractBoundary;
 import co.crisi.productopolis.boundaries.input.register.IBrandRegisterBoundary;
 import co.crisi.productopolis.boundaries.input.update.IBrandUpdateBoundary;
+import co.crisi.productopolis.boundaries.output.IBrandDeleteGateway;
 import co.crisi.productopolis.boundaries.output.IBrandExtractGateway;
 import co.crisi.productopolis.boundaries.output.IBrandRegisterGateway;
 import co.crisi.productopolis.boundaries.output.IBrandUpdateGateway;
 import co.crisi.productopolis.domain.factory.IBrandFactory;
 import co.crisi.productopolis.domain.factory.impl.BrandFactory;
+import co.crisi.productopolis.interactors.delete.BrandDeleteInteractor;
 import co.crisi.productopolis.interactors.extract.BrandExtractInteractor;
 import co.crisi.productopolis.interactors.register.BrandRegisterInteractor;
 import co.crisi.productopolis.interactors.update.BrandUpdateInteractor;
@@ -66,6 +69,11 @@ public class BrandBeansConfig {
     @Bean
     public IBrandUpdateBoundary brandUpdateBoundary(IBrandUpdateGateway gateway, IBrandUpdatePresenter presenter) {
         return new BrandUpdateInteractor(factory, gateway, presenter, mapper);
+    }
+
+    @Bean
+    public IBrandDeleteBoundary brandDeleteBoundary(IBrandDeleteGateway gateway, IBrandDeletePresenter presenter) {
+        return new BrandDeleteInteractor(gateway, presenter);
     }
 
 
