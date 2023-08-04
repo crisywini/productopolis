@@ -27,9 +27,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BrandBeansConfig {
 
-    private final BrandMapper MAPPER = Mappers.getMapper(BrandMapper.class);
+    private final BrandMapper mapper = Mappers.getMapper(BrandMapper.class);
 
-    private final IBrandFactory FACTORY = new BrandFactory();
+    private final IBrandFactory factory = new BrandFactory();
 
     @Bean
     public IBrandRegisterPresenter brandRegisterPresenter() {
@@ -54,18 +54,18 @@ public class BrandBeansConfig {
     @Bean
     public IBrandRegisterBoundary brandRegisterBoundary(IBrandRegisterPresenter presenter,
             IBrandRegisterGateway gateway) {
-        return new BrandRegisterInteractor(presenter, FACTORY, gateway,
-                MAPPER);
+        return new BrandRegisterInteractor(presenter, factory, gateway,
+                mapper);
     }
 
     @Bean
     public IBrandExtractBoundary brandExtractBoundary(IBrandExtractPresenter presenter, IBrandExtractGateway gateway) {
-        return new BrandExtractInteractor(MAPPER, presenter, gateway);
+        return new BrandExtractInteractor(mapper, presenter, gateway);
     }
 
     @Bean
     public IBrandUpdateBoundary brandUpdateBoundary(IBrandUpdateGateway gateway, IBrandUpdatePresenter presenter) {
-        return new BrandUpdateInteractor(FACTORY, gateway, presenter, MAPPER);
+        return new BrandUpdateInteractor(factory, gateway, presenter, mapper);
     }
 
 
