@@ -15,10 +15,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ProductBeansConfig {
 
-    @Bean
-    public IProductRegisterGateway productRegisterGateway() {
-        return new ProductRegisterPostgresGateway();
-    }
 
     @Bean
     public IProductRegisterPresenter productRegisterPresenter() {
