@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import lombok.Getter;
 @Entity
 @Table(name = "review")
 @Getter
-public class ReviewJpaEntity {
+public class ReviewJpaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
