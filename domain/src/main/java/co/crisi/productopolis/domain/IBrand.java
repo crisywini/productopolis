@@ -10,7 +10,7 @@ public interface IBrand {
 
     String getDescription();
 
-    List<IProduct> getProducts();
+    List<? extends IProduct> getProducts();
 
 
 }
