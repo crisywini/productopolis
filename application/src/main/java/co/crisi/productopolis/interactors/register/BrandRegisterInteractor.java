@@ -9,6 +9,7 @@ import co.crisi.productopolis.model.request.BrandRequest;
 import co.crisi.productopolis.model.response.BrandResponse;
 import co.crisi.productopolis.model.response.mapper.BrandMapper;
 import co.crisi.productopolis.presenter.register.IBrandRegisterPresenter;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -25,7 +26,7 @@ public class BrandRegisterInteractor implements IBrandRegisterBoundary {
     @Override
     public BrandResponse create(BrandRequest request) throws BrandBusinessException {
 
-        if (gateway.existsById(request.id())) {
+        if (Objects.nonNull(request.id()) && gateway.existsById(request.id())) {
             return presenter.prepareFailView(
                     new RepeatedBrandException(String.format("The brand with id %d already exists!", request.id())));
         }

@@ -8,7 +8,6 @@ import co.crisi.productopolis.exception.BusinessException;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.ProductNotFoundException;
 import co.crisi.productopolis.model.request.ProductUpdateQuantityRequest;
-import co.crisi.productopolis.model.request.ProductUpdateRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
 import co.crisi.productopolis.model.response.mapper.ProductMapper;
 import co.crisi.productopolis.presenter.update.IProductUpdatePresenter;
