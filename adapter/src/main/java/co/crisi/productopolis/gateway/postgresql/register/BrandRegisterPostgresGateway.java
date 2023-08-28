@@ -27,7 +27,7 @@ public class BrandRegisterPostgresGateway implements IBrandRegisterGateway {
     public IBrand save(IBrand entity) {
         var jpaEntity = mapper.map(entity);
         BrandJpaEntity save = repository.save(jpaEntity);
-        return (IBrand) repository.save(jpaEntity);
+        return mapper.map(save);
     }
 
 }

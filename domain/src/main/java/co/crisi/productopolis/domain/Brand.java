@@ -4,10 +4,12 @@ import co.crisi.productopolis.domain.validator.decorator.NonNullValidatorDecorat
 import co.crisi.productopolis.domain.validator.decorator.NotEmptyValidatorDecorator;
 import co.crisi.productopolis.domain.validator.impl.ValidatorImpl;
 import java.util.List;
+import lombok.Builder;
 
 public record Brand(Long id, String name, String description, List<IProduct> products)
         implements IBrand {
 
+    @Builder
     public Brand(Long id, String name, String description, List<IProduct> products) {
         var validator = new ValidatorImpl();
         var nonNullDecorator = new NonNullValidatorDecorator(validator);

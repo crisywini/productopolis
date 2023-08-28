@@ -1,6 +1,5 @@
 package co.crisi.productopolis.gateway.jpamodel;
 
-import co.crisi.productopolis.domain.IProduct;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Builder
-public class ProductJpaEntity implements Serializable, IProduct {
+public class ProductJpaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

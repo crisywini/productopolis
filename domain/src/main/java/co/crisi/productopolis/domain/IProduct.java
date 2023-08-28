@@ -26,12 +26,12 @@ public interface IProduct {
 
     IBrand getBrand();
 
-    List<? extends IAttribute> getAttributes();
+    List<IAttribute> getAttributes();
 
-    List<? extends ICategory> getCategories();
+    List<ICategory> getCategories();
 
-    List<? extends IReview> getReviews();
+    List<IReview> getReviews();
 
-    List<? extends IImage> getImages();
+    List<IImage> getImages();
 
 }
