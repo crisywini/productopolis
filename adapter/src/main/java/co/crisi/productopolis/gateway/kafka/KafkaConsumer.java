@@ -1,5 +1,6 @@
 package co.crisi.productopolis.gateway.kafka;
 
+import co.crisi.productopolis.domain.messages.OrderProcessed;
 import co.crisi.productopolis.domain.messages.Topics;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Component;
 public class KafkaConsumer {
 
     @KafkaListener(id = "myId", topics = Topics.THIRD_TOPIC)
-    public void listen(String in) {
-        System.out.println(in);
+    public void listen(OrderProcessed orderProcessed) {
+        System.out.println(orderProcessed);
+        System.out.println(orderProcessed.getKey());
+        System.out.println(orderProcessed.getProducts());
     }
 
 }

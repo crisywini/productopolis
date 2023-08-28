@@ -16,3 +16,5 @@ spring:
     bootstrap-servers: cluster.playground.cdkt.io:9092
     consumer:
       auto-offset-reset: latest
+server:
+  port: 8081

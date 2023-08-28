@@ -1,5 +1,7 @@
 package co.crisi.productopolis.domain.messages;
 
-public record ProductUpdate(Long id, Integer quantity) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record ProductUpdate(@JsonProperty("id") Long id, @JsonProperty("quantity") Integer quantity) {
 
 }
