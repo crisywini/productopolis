@@ -19,13 +19,14 @@ import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import java.time.LocalDate;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
 
 @RequiredArgsConstructor
 public class ProductRegisterInteractor implements IProductRegisterBoundary {
-    
+
     private final IProductRegisterGateway gateway;
 
     private final IProductRegisterPresenter presenter;
@@ -51,7 +52,7 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
     }
 
     private Either<BusinessException, ProductRequest> validateProductExistence(ProductRequest request) {
-        if (gateway.existsById(request.id())) {
+        if (Objects.nonNull(request.id()) && gateway.existsById(request.id())) {
             return Either.left(new RepeatedProductException(String
                     .format("Product with id %d already exists!", request.id())));
         }
