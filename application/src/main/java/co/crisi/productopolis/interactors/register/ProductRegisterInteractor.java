@@ -100,24 +100,26 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var categories = request.categoryIds().stream()
                 .map(categoryExtractGateway::getById)
                 .toList();
-        return Try.of(() -> Product.builder()
-                        .id(request.id())
-                        .name(request.name())
-                        .description(request.description())
-                        .price(request.price())
-                        .stock(request.stock())
-                        .isFeatured(request.isFeatured())
-                        .isActive(request.isActive())
-                        .brand(brand)
-                        .attributes(attributes)
-                        .categories(categories)
-                        .creationDate(LocalDate.now())
-                        .lastUpdated(LocalDate.now())
-                        .build())
+        return Try.of(() -> {
+                    var product = Product.builder()
+                            .id(request.id())
+                            .name(request.name())
+                            .description(request.description())
+                            .price(request.price())
+                            .stock(request.stock())
+                            .isFeatured(request.isFeatured())
+                            .isActive(request.isActive())
+                            .brand(brand)
+                            .attributes(attributes)
+                            .categories(categories)
+                            .creationDate(LocalDate.now())
+                            .lastUpdated(LocalDate.now())
+                            .build();
+                    return gateway.save(product);
+                })
                 .toEither()
                 .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
-
-
     }
+
 
 }

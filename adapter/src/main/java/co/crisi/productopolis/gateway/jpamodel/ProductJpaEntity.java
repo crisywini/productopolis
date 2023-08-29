@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -67,10 +68,10 @@ public class ProductJpaEntity implements Serializable {
     private List<CategoryJpaEntity> categories;
 
     @OneToMany(mappedBy = "product")
-    private List<ImageJpaEntity> images;
+    private List<ImageJpaEntity> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private List<ReviewJpaEntity> reviews;
+    private List<ReviewJpaEntity> reviews = new ArrayList<>();
 
     public ProductJpaEntity(ProductJpaEntity entity) {
         this.id = entity.getId();

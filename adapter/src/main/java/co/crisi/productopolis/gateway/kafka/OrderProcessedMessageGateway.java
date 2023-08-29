@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class OrderProcessedMessageGateway implements IReceiveMessageGateway<Orde
 
     @Override
     @KafkaListener(id = "myId", topics = Topics.THIRD_TOPIC)
+    @Transactional
     public void listen(OrderProcessed orderProcessed) {
         log.debug("Received message: {}", orderProcessed.getKey());
         var request = orderProcessed.getProducts()

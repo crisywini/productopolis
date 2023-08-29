@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
@@ -34,7 +36,7 @@ public class BrandJpaEntity implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "brand")
-    private List<ProductJpaEntity> products;
+    private List<ProductJpaEntity> products = new ArrayList<>();
 
     public BrandJpaEntity(BrandJpaEntity entity) {
         this.id = entity.getId();
@@ -44,7 +46,7 @@ public class BrandJpaEntity implements Serializable {
     }
 
     public List<ProductJpaEntity> getProducts() {
-        return List.copyOf(products);
+        return Objects.isNull(products) ? Collections.emptyList() : List.copyOf(products);
     }
 
     @Override
