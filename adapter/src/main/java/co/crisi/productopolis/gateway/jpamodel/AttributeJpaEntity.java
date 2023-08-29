@@ -31,8 +31,6 @@ public class AttributeJpaEntity implements Serializable {
 
     private String description;
 
-    private String value;
-
     public AttributeJpaEntity(AttributeJpaEntity entity) {
         this.id = entity.getId();
         this.name = entity.getName();

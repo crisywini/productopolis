@@ -11,7 +11,6 @@ public class AttributeJpaEntityMother {
                 .id(1L)
                 .name("weight")
                 .description("The weight of the product!")
-                .value("10Lbs")
                 .build();
     }
 
