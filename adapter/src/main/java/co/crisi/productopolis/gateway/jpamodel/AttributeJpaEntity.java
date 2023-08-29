@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
+
 public class AttributeJpaEntity implements Serializable {
 
     @Id
@@ -27,6 +30,8 @@ public class AttributeJpaEntity implements Serializable {
     private String name;
 
     private String description;
+
+    private String value;
 
     public AttributeJpaEntity(AttributeJpaEntity entity) {
         this.id = entity.getId();
