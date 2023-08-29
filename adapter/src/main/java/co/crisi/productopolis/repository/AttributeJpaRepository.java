@@ -7,7 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AttributeJpaRepository extends PagingAndSortingRepository<AttributeJpaEntity, Long>,
-        CrudRepository<AttributeJpaEntity, Long>
-{
+        CrudRepository<AttributeJpaEntity, Long> {
+
+    boolean existsByName(String name);
 
 }
