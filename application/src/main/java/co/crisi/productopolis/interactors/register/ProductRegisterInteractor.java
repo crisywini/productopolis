@@ -19,13 +19,14 @@ import co.crisi.productopolis.presenter.register.IProductRegisterPresenter;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import java.time.LocalDate;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 
 
 @RequiredArgsConstructor
 public class ProductRegisterInteractor implements IProductRegisterBoundary {
-    
+
     private final IProductRegisterGateway gateway;
 
     private final IProductRegisterPresenter presenter;
@@ -51,7 +52,7 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
     }
 
     private Either<BusinessException, ProductRequest> validateProductExistence(ProductRequest request) {
-        if (gateway.existsById(request.id())) {
+        if (Objects.nonNull(request.id()) && gateway.existsById(request.id())) {
             return Either.left(new RepeatedProductException(String
                     .format("Product with id %d already exists!", request.id())));
         }
@@ -99,24 +100,26 @@ public class ProductRegisterInteractor implements IProductRegisterBoundary {
         var categories = request.categoryIds().stream()
                 .map(categoryExtractGateway::getById)
                 .toList();
-        return Try.of(() -> Product.builder()
-                        .id(request.id())
-                        .name(request.name())
-                        .description(request.description())
-                        .price(request.price())
-                        .stock(request.stock())
-                        .isFeatured(request.isFeatured())
-                        .isActive(request.isActive())
-                        .brand(brand)
-                        .attributes(attributes)
-                        .categories(categories)
-                        .creationDate(LocalDate.now())
-                        .lastUpdated(LocalDate.now())
-                        .build())
+        return Try.of(() -> {
+                    var product = Product.builder()
+                            .id(request.id())
+                            .name(request.name())
+                            .description(request.description())
+                            .price(request.price())
+                            .stock(request.stock())
+                            .isFeatured(request.isFeatured())
+                            .isActive(request.isActive())
+                            .brand(brand)
+                            .attributes(attributes)
+                            .categories(categories)
+                            .creationDate(LocalDate.now())
+                            .lastUpdated(LocalDate.now())
+                            .build();
+                    return gateway.save(product);
+                })
                 .toEither()
                 .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
-
-
     }
+
 
 }

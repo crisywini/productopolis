@@ -1,5 +1,6 @@
 package co.crisi.productopolis.gateway.jpamodel;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,19 +14,21 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
+@Setter
 public class ProductJpaEntity implements Serializable {
 
     @Id
@@ -58,17 +61,17 @@ public class ProductJpaEntity implements Serializable {
     @OneToMany(mappedBy = "product")
     private List<ProductAttributeJpaEntity> attributes;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "product_category",
                joinColumns = @JoinColumn(name = "category_id"),
                inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<CategoryJpaEntity> categories;
 
     @OneToMany(mappedBy = "product")
-    private List<ImageJpaEntity> images;
+    private List<ImageJpaEntity> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private List<ReviewJpaEntity> reviews;
+    private List<ReviewJpaEntity> reviews = new ArrayList<>();
 
     public ProductJpaEntity(ProductJpaEntity entity) {
         this.id = entity.getId();
