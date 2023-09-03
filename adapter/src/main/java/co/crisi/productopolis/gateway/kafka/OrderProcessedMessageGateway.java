@@ -26,7 +26,7 @@ public class OrderProcessedMessageGateway implements IReceiveMessageGateway<Orde
     @Transactional
     public void listen(OrderProcessed orderProcessed) {
         log.debug("Received message: {}", orderProcessed.getKey());
-        var request = orderProcessed.getProducts()
+        var request = orderProcessed.getOrder().products()
                 .stream()
                 .map(p -> new ProductUpdateQuantityRequest(p.id(), p.quantity()))
                 .collect(Collectors.toList());

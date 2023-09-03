@@ -5,7 +5,6 @@ import co.crisi.productopolis.boundaries.output.IProductUpdateGateway;
 import co.crisi.productopolis.domain.IProduct;
 import co.crisi.productopolis.domain.Product;
 import co.crisi.productopolis.domain.ProductUpdateQuantityRequestMother;
-import co.crisi.productopolis.domain.messages.ProductUpdate;
 import co.crisi.productopolis.domain.objectmother.ProductMother;
 import co.crisi.productopolis.model.request.ProductUpdateQuantityRequest;
 import co.crisi.productopolis.model.response.ProductResponse;
@@ -20,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;

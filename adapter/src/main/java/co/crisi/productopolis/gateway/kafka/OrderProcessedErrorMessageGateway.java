@@ -1,6 +1,5 @@
 package co.crisi.productopolis.gateway.kafka;
 
-import co.crisi.productopolis.annotations.ExperimentalFeature;
 import co.crisi.productopolis.boundaries.output.message.ISendMessageGateway;
 import co.crisi.productopolis.domain.messages.Topics;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,7 @@ public class OrderProcessedErrorMessageGateway implements ISendMessageGateway<St
 
     @Override
     public void sendMessage(String message) {
-        kafkaTemplate.send(Topics.THIRD_TOPIC, message);
+        kafkaTemplate.send(Topics.EXCEPTION, message);
         kafkaTemplate.flush();
     }
 
