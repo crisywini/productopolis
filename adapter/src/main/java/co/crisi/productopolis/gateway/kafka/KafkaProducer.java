@@ -1,5 +1,6 @@
 package co.crisi.productopolis.gateway.kafka;
 
+import co.crisi.productopolis.annotations.ExperimentalFeature;
 import co.crisi.productopolis.boundaries.output.message.ISendMessageGateway;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class KafkaProducer implements ISendMessageGateway {
+@ExperimentalFeature
+public class KafkaProducer implements ISendMessageGateway<String> {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;

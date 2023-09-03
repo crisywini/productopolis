@@ -5,6 +5,7 @@ import co.crisi.productopolis.boundaries.output.IProductExtractGateway;
 import co.crisi.productopolis.boundaries.output.IProductUpdateGateway;
 import co.crisi.productopolis.domain.Product;
 import co.crisi.productopolis.exception.BusinessException;
+import co.crisi.productopolis.exception.IncorrectProductStockException;
 import co.crisi.productopolis.exception.ProductBusinessException;
 import co.crisi.productopolis.exception.ProductNotFoundException;
 import co.crisi.productopolis.model.request.ProductUpdateQuantityRequest;
@@ -40,11 +41,11 @@ public class ProductUpdateQuantityInteractor implements IProductUpdateQuantityBo
     private Either<BusinessException, ProductUpdateQuantityRequest> validateQuantity(
             ProductUpdateQuantityRequest request) {
         if (request.quantity() < 0) {
-            return Either.left(new ProductBusinessException("The quantity is negative!"));
+            return Either.left(new IncorrectProductStockException("The quantity is negative!"));
         }
         var product = productExtractGateway.getById(request.productId());
         if (product.getStock() < request.quantity()) {
-            return Either.left(new ProductBusinessException("The quantity is more than the stock now!"));
+            return Either.left(new IncorrectProductStockException("The quantity is more than the stock now!"));
         }
         return Either.right(request);
     }
