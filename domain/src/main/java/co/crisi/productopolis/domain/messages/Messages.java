@@ -6,4 +6,7 @@ import lombok.experimental.UtilityClass;
 public class Messages {
 
     public final String ORDER_PROCESSED = "orderProcessed";
+
+    public final String ORDER_FAILED = "orderFailed";
+
 }

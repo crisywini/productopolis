@@ -34,6 +34,7 @@ public class OrderProcessedMessageGateway implements IReceiveMessageGateway<Orde
             request.forEach(productUpdateBoundary::updateQuantity);
         } catch (ProductNotFoundException notFound) {
 
+
         } catch (IncorrectProductStockException productStockException) {
 
         }
