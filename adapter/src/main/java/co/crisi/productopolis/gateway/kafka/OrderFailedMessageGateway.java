@@ -19,7 +19,7 @@ public class OrderFailedMessageGateway implements ISendMessageGateway<OrderFaile
     @Override
     public void sendMessage(OrderFailed message) {
         kafkaTemplate.send(Topics.EXCEPTION, message.getKey(), message);
+        kafkaTemplate.flush();
     }
 
 }
-        

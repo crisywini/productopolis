@@ -2,6 +2,9 @@ package co.crisi.productopolis.gateway.kafka;
 
 import co.crisi.productopolis.boundaries.input.update.IProductUpdateQuantityBoundary;
 import co.crisi.productopolis.boundaries.output.message.IReceiveMessageGateway;
+import co.crisi.productopolis.boundaries.output.message.ISendMessageGateway;
+import co.crisi.productopolis.domain.messages.FailedOrderDto;
+import co.crisi.productopolis.domain.messages.OrderFailed;
 import co.crisi.productopolis.domain.messages.OrderProcessed;
 import co.crisi.productopolis.domain.messages.Topics;
 import co.crisi.productopolis.exception.IncorrectProductStockException;
@@ -21,6 +24,8 @@ public class OrderProcessedMessageGateway implements IReceiveMessageGateway<Orde
 
     private final IProductUpdateQuantityBoundary productUpdateBoundary;
 
+    private final ISendMessageGateway<OrderFailed> orderFailedMessageGateway;
+
     @Override
     @KafkaListener(id = "myId", topics = Topics.THIRD_TOPIC)
     @Transactional
@@ -32,13 +37,13 @@ public class OrderProcessedMessageGateway implements IReceiveMessageGateway<Orde
                 .collect(Collectors.toList());
         try {
             request.forEach(productUpdateBoundary::updateQuantity);
-        } catch (ProductNotFoundException notFound) {
-
-
-        } catch (IncorrectProductStockException productStockException) {
-
+        } catch (ProductNotFoundException | IncorrectProductStockException e) {
+            var failedOrderDto = new FailedOrderDto(orderProcessed.getOrder().orderId(), e.getMessage());
+            var orderFailedMessage = new OrderFailed(failedOrderDto);
+            orderFailedMessageGateway.sendMessage(orderFailedMessage);
+            log.debug("Messaged processed with error!");
         }
-        log.debug("Messaged processed!");
+        log.debug("Messaged processed successfully!");
     }
 
 }
