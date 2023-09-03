@@ -14,4 +14,8 @@ public class OrderFailed extends Message<FailedOrderDto> {
         return Messages.ORDER_FAILED;
     }
 
+    public FailedOrderDto getFailedOrder() {
+        return failedOrder;
+    }
+
 }
