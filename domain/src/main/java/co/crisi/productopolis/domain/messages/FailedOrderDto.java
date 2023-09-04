@@ -1,5 +1,8 @@
 package co.crisi.productopolis.domain.messages;
 
-public record FailedOrderDto(Long orderId, String errorMessage) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record FailedOrderDto(@JsonProperty("orderId") Long orderId,
+                             @JsonProperty("error") String errorMessage) {
 
 }

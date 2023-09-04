@@ -14,11 +14,11 @@ public class OrderFailedSerializer implements Serializer<OrderFailed> {
     }
 
     @Override
-    public byte[] serialize(String s, OrderFailed orderProcessed) {
+    public byte[] serialize(String s, OrderFailed orderFailed) {
         byte[] retVal = null;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            retVal = objectMapper.writeValueAsString(orderProcessed).getBytes();
+            retVal = objectMapper.writeValueAsString(orderFailed).getBytes();
         } catch (Exception e) {
             e.printStackTrace();
         }
