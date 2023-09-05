@@ -2,7 +2,7 @@
 
 (Small description of your changes)
 
-# New functionalinities?  🐣
+# New functionalities?  🐣
 - [ ] Yes
 - [ ] No
 
