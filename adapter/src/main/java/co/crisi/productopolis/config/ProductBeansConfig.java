@@ -4,6 +4,7 @@ import co.crisi.productopolis.boundaries.input.delete.IProductDeleteBoundary;
 import co.crisi.productopolis.boundaries.input.extract.IProductExtractBoundary;
 import co.crisi.productopolis.boundaries.input.register.IProductRegisterBoundary;
 import co.crisi.productopolis.boundaries.input.update.IProductUpdateBoundary;
+import co.crisi.productopolis.boundaries.input.update.IProductUpdateQuantityBoundary;
 import co.crisi.productopolis.boundaries.output.IAttributeExtractGateway;
 import co.crisi.productopolis.boundaries.output.IBrandExtractGateway;
 import co.crisi.productopolis.boundaries.output.ICategoryExtractGateway;
@@ -15,6 +16,7 @@ import co.crisi.productopolis.interactors.delete.ProductDeleteInteractor;
 import co.crisi.productopolis.interactors.extract.ProductExtractInteractor;
 import co.crisi.productopolis.interactors.register.ProductRegisterInteractor;
 import co.crisi.productopolis.interactors.update.ProductUpdateInteractor;
+import co.crisi.productopolis.interactors.update.ProductUpdateQuantityInteractor;
 import co.crisi.productopolis.presenter.delete.IProductDeletePresenter;
 import co.crisi.productopolis.presenter.delete.ProductDeletePresenter;
 import co.crisi.productopolis.presenter.extract.IProductExtractPresenter;
@@ -77,6 +79,13 @@ public class ProductBeansConfig {
             ICategoryExtractGateway categoryExtractGateway) {
         return new ProductUpdateInteractor(gateway, presenter, productExtractGateway, brandExtractGateway,
                 attributeExtractGateway, categoryExtractGateway);
+    }
+
+
+    @Bean
+    public IProductUpdateQuantityBoundary productUpdateQuantityBoundary(IProductUpdatePresenter presenter,
+            IProductUpdateGateway productUpdateGateway, IProductExtractGateway extractGateway) {
+        return new ProductUpdateQuantityInteractor(presenter, productUpdateGateway, extractGateway);
     }
 
 

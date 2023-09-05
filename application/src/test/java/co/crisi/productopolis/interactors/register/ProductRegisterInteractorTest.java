@@ -65,6 +65,8 @@ class ProductRegisterInteractorTest {
         var product = ProductMother.random();
         var response = mapper.map(product);
         givenExistenceForHappyPath(productRequest);
+        given(gateway.save(any(IProduct.class)))
+                .willReturn(product);
         var brand = BrandMother.random();
         given(brandExtractGateway.getById(brand.getId()))
                 .willReturn(brand);

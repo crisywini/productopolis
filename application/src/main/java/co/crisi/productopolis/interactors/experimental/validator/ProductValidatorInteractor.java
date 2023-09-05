@@ -31,7 +31,7 @@ public class ProductValidatorInteractor {
 
 
     public Either<BusinessException, ProductRequest> validateProductExistence(ProductRequest request) {
-        if (gateway.existsById(request.id())) {
+        if (Objects.nonNull(request.id()) && gateway.existsById(request.id())) {
             return Either.left(new RepeatedProductException(String
                     .format("Product with id %d already exists!", request.id())));
         }

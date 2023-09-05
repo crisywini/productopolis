@@ -7,8 +7,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true  # Set to true to show SQL statements in the console for debugging
+  kafka:
+    bootstrap-servers: cluster.playground.cdkt.io:9092
+    consumer:
+      auto-offset-reset: latest
+server:
+  port: 8081
