@@ -1,6 +1,6 @@
 package co.crisi.productopolis.domain.exception;
 
-public class EmptyStringException extends RuntimeException{
+public class EmptyStringException extends DomainException{
 
     public EmptyStringException(String errorMessage){
         super(errorMessage);
