@@ -14,6 +14,23 @@ This microservice will handle all the product-related functionalities. It will b
 
 Installed Maven and Java 17 and Kafka.
 
+To start Kafka:
+
+    kafka-server-start.sh ~/kafka_2.12-3.5.1/config/kraft/server.properties
+
+To Fix IPV6 error in WSL2:
+
+    sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+
+And 
+
+    sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
+And change config servers in _config/server.properties_
+
+    listeners=PLAINTEXT://localhost:9092
+
+
 ## Api Documentation
 
 Can be found at:
