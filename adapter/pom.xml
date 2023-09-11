@@ -15,7 +15,6 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <postgresql.version>42.6.0</postgresql.version>
-    <org.springdoc.openapi.version>2.1.0</org.springdoc.openapi.version>
   </properties>
 
 

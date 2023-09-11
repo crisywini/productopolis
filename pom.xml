@@ -26,6 +26,7 @@
     <org.lombok.version>1.18.24</org.lombok.version>
     <org.lombok-mapstruct-binding.version>0.2.0</org.lombok-mapstruct-binding.version>
     <io.vavr.version>0.9.0</io.vavr.version>
+    <org.springdoc.openapi.version>2.1.0</org.springdoc.openapi.version>
   </properties>
 
   <dependencies>
