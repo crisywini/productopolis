@@ -29,6 +29,12 @@
             <version>${org.lombok-mapstruct-binding.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${org.springdoc.openapi.version}</version>
+        </dependency>
+
         <!--Object Mothers -->
         <dependency>
             <groupId>co.crisi</groupId>
