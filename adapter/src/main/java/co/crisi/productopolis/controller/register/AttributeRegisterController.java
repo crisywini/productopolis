@@ -25,7 +25,7 @@ public class AttributeRegisterController {
     @PostMapping
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "201", description = "Entity Created")
+                    @ApiResponse(responseCode = "201", description = "Attribute Created")
             }
     )
     public ResponseEntity<AttributeResponse> create(
