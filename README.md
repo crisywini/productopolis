@@ -19,3 +19,26 @@ Installed Maven and Java 17 and Kafka.
 Can be found at:
 
     http://localhost:8081/swagger-ui/index.html
+
+
+## Event Driven Communication
+
+### Use case 
+
+_**When**_ the message Order Processed its listened
+
+_**Then**_ The products will be updated by its new stock
+
+
+### Use Case
+
+_**When**_ the message Order Processed its listened
+
+_**And**_ The products has incorrect ids
+
+_**Or**_ The products has incorrect stock to update
+
+_**Then**_ The Order Failed message will be sent to Ship-M8
+
+
+
