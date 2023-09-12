@@ -59,3 +59,6 @@ _**Then**_ The Order Failed message will be sent to Ship-M8
 
 
 
+## Database Schema 
+
+![Database_schema](https://github.com/crisywini/productopolis/blob/develop/db-scheme-productopolis.png)
