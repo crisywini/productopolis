@@ -25,6 +25,8 @@ public interface ProductJpaMapper {
     @Mapping(target = "attributes", expression = "java(mapToProductAttributeEntities(product.getAttributes()))")
     @Mapping(target = "images", ignore = true)
     @Mapping(target = "reviews", ignore = true)
+    @Mapping(target = "featured", expression = "java(product.isFeatured())")
+    @Mapping(target = "active", expression = "java(product.isActive())")
     ProductJpaEntity map(IProduct product);
 
     default List<ProductAttributeJpaEntity> mapToProductAttributeEntities(List<IAttribute> attributes) {
@@ -53,6 +55,8 @@ public interface ProductJpaMapper {
     @Mapping(target = "attributes", expression = "java(mapToAttributes(productJpaEntity.getAttributes()))")
     @Mapping(target = "images", ignore = true)
     @Mapping(target = "reviews", ignore = true)
+    @Mapping(target = "isFeatured", source = "featured")
+    @Mapping(target = "isActive", source = "active")
     Product map(ProductJpaEntity productJpaEntity);
 
     default Attribute mapToAttribute(ProductAttributeJpaEntity entity) {
