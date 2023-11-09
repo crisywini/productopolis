@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: productopolis
   datasource:
     url: jdbc:postgresql://localhost:5432/productopolis_dev_db
     username: postgres
@@ -19,3 +21,9 @@ spring:
       auto-offset-reset: latest
 server:
   port: 8081
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
